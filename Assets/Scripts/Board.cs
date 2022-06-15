@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,9 +8,13 @@ public class Board : MonoBehaviour
     public int height;
 
     public GameObject tileBgPrefab;
+    
     public Gem[] gems;
+    public Gem[,] allGems; 
+    
     void Start()
     {
+        allGems = new Gem[width, height];
         Setup();
     }
 
@@ -38,6 +39,10 @@ public class Board : MonoBehaviour
     private void SpawnGem(Vector2Int pos, Gem gemToSpawn)   // using vec2Int becoz i want a whole value.
     {
         Gem gem = Instantiate(gemToSpawn, new Vector3(pos.x, pos.y, 0), Quaternion.identity);
+        gem.transform.parent = transform;
         gem.name = "Gem (" + pos.x + "," + pos.y + ")";
+        allGems[pos.x, pos.y] = gem;    // Storing it in 2D array so that i can access it.
+
+        gem.SetupGem(pos, this);
     }
 }

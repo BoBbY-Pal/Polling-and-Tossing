@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Gem : MonoBehaviour
-{
-    // Start is called before the first frame update
+{   
+    
+    [HideInInspector] public Vector2Int posIndex;
+    [HideInInspector] public Board board;
     void Start()
     {
         
@@ -15,4 +17,11 @@ public class Gem : MonoBehaviour
     {
         
     }
+
+    public void SetupGem(Vector2Int pos, Board theBoard)
+    {
+        posIndex = pos;
+        board = theBoard;
+    }
+    
 }

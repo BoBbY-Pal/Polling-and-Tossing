@@ -1,4 +1,5 @@
 
+using System.Security.Cryptography;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -62,7 +63,7 @@ public class Board : MonoBehaviour
         gem.SetupGem(pos, this);
     }
 
-    bool MatchesAt(Vector2Int posToCheck, Gem gemToCheck)    // Ensures that there's no match exist in the beginning of game.
+    private bool MatchesAt(Vector2Int posToCheck, Gem gemToCheck)    // Ensures that there's no match exist in the beginning of game.
     {
         if (posToCheck.x > 1)
         {
@@ -81,5 +82,28 @@ public class Board : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void DestroyMatchedGemAt(Vector2Int pos)
+    {
+        if (allGems[pos.x, pos.y] != null)
+        {
+            if (allGems[pos.x, pos.y].b_IsMatched)
+            {
+                Destroy(allGems[pos.x, pos.y].gameObject);
+                allGems[pos.x, pos.y] = null;
+            }
+        }
+    }
+
+    public void DestroyMatches()
+    {
+        for (int i = 0; i < matchFind.currentMatches.Count; i++)
+        {
+            if (matchFind.currentMatches[i] != null)
+            {
+                DestroyMatchedGemAt(matchFind.currentMatches[i].posIndex);
+            }
+        }
     }
 }

@@ -122,6 +122,10 @@ public class Gem : MonoBehaviour
                 board.allGems[posIndex.x, posIndex.y] = this;
                 board.allGems[neighborGem.posIndex.x, neighborGem.posIndex.y] = neighborGem;
             }
+            else
+            {
+                board.DestroyMatches();
+            }
         }
     }
 }

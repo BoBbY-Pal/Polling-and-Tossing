@@ -14,7 +14,6 @@ public class MatchFinder : MonoBehaviour
     // }
     public void FindAllGemMatches()
     {
-        // currentMatches.Clear();
         for (int i = 0; i < board.width; i++)
         {
             for (int j = 0; j < board.height; j++)
@@ -43,6 +42,7 @@ public class MatchFinder : MonoBehaviour
                             }
                         }
                     }
+                    
                     // Vertical match
                     if (j > 0 && j < board.height - 1)
                     {

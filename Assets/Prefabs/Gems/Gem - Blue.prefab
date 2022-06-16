@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7302971701652252911}
   - component: {fileID: 2624750049957547654}
   - component: {fileID: 2337052358783866190}
+  - component: {fileID: -84045273752763111}
   m_Layer: 0
   m_Name: Gem - Blue
   m_TagString: Untagged
@@ -97,3 +98,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee959fe5037cae04b93d338c71d8f738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  posIndex: {x: 0, y: 0}
+  board: {fileID: 0}
+  firstTouchPosition: {x: 0, y: 0}
+  finalTouchPosition: {x: 0, y: 0}
+  mousePressed: 0
+  swipeAngle: 0
+--- !u!61 &-84045273752763111
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6801420106726621569}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.8820513, y: 0.8871795}
+    newSize: {x: 0.8820513, y: 0.8871795}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.95, y: 0.95}
+  m_EdgeRadius: 0

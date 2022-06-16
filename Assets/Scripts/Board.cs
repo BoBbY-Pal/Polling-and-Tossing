@@ -1,4 +1,5 @@
 
+using System.Collections;
 using System.Security.Cryptography;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -104,6 +105,32 @@ public class Board : MonoBehaviour
             {
                 DestroyMatchedGemAt(matchFind.currentMatches[i].posIndex);
             }
+        }
+
+        StartCoroutine(RowFallDown());
+    }
+
+    private IEnumerator RowFallDown()
+    {
+        yield return new WaitForSeconds(.2f);
+        int emptySlotCounter = 0;
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                if (allGems[i, j] == null)
+                {
+                    emptySlotCounter++;
+                }
+                else if (emptySlotCounter > 0)
+                {
+                    allGems[i, j].posIndex.y -= emptySlotCounter;
+                    allGems[i, j - emptySlotCounter] = allGems[i, j];
+                    allGems[i, j] = null;
+                }
+            }
+
+            emptySlotCounter = 0;
         }
     }
 }

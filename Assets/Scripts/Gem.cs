@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Gem : MonoBehaviour
@@ -15,18 +13,23 @@ public class Gem : MonoBehaviour
     private Vector2 finalTouchPosition;
 
     private bool b_MousePressed;
-    private float swipeAngle = 0;
+    private float swipeAngle;
 
     private Gem neighborGem;
-    
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
+        if (Vector2.Distance(transform.position, posIndex) > .01f)
+        {
+            transform.position = Vector2.Lerp(transform.position, posIndex, board.gemTransitionSpeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.position = new Vector3(posIndex.x, posIndex.y, 0f);
+            board.allGems[posIndex.x, posIndex.y] = this;
+        }
+        
         if (b_MousePressed && Input.GetMouseButtonUp(0))
         {
             b_MousePressed = false;
@@ -61,36 +64,39 @@ public class Gem : MonoBehaviour
     }
 
     private void MovePieces()
-    {   // Right
-        if (swipeAngle > -45 && swipeAngle < 45 && posIndex.x < board.width - 1)
+    {
+        // Right swipe
+        if (swipeAngle is > -45 and < 45 && posIndex.x < board.width - 1)
         {
             neighborGem = board.allGems[posIndex.x + 1, posIndex.y];
             neighborGem.posIndex.x--;
             posIndex.x++;
 
         }
-        // Up
-        else if (swipeAngle > 45 && swipeAngle <= 135 && posIndex.y < board.height - 1)
+        // Up swipe
+        else if (swipeAngle is > 45 and <= 135 && posIndex.y < board.height - 1)
         {
             neighborGem = board.allGems[posIndex.x, posIndex.y + 1];
             neighborGem.posIndex.y--;
             posIndex.y++;
 
         }
-        // Down
-        else if (swipeAngle > -135 && swipeAngle < -45 && posIndex.y > 0)
+        // Down swipe
+        else if (swipeAngle is >= -135 and < -45 && posIndex.y > 0)
         {
             neighborGem = board.allGems[posIndex.x, posIndex.y - 1];
             neighborGem.posIndex.y++;
             posIndex.y--;
         }
-        // left
+        // left swipe
         else if (swipeAngle > 135 || swipeAngle <= -135 && posIndex.x > 0)
         {
             neighborGem = board.allGems[posIndex.x - 1, posIndex.y];
             neighborGem.posIndex.x++;
             posIndex.x--;
-
         }
+
+        board.allGems[posIndex.x, posIndex.y] = this;
+        board.allGems[neighborGem.posIndex.x, neighborGem.posIndex.y] = neighborGem;
     }
 }

@@ -238,6 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 7
   height: 7
+  gemTransitionSpeed: 7
   tileBgPrefab: {fileID: 6490645704314675659, guid: 12cc346aa4f5f2d458222da9c8fd7c49, type: 3}
   gems:
   - {fileID: 2337052358783866190, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}

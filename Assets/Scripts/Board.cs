@@ -6,12 +6,13 @@ public class Board : MonoBehaviour
 {
     public int width;
     public int height;
+    public float gemTransitionSpeed;
 
     public GameObject tileBgPrefab;
     
     public Gem[] gems;
-    public Gem[,] allGems; 
-    
+    public Gem[,] allGems;
+
     void Start()
     {
         allGems = new Gem[width, height];

@@ -1,17 +1,20 @@
-using System;
+
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MatchFinder : MonoBehaviour
 {
     public Board board;
 
+    public List<Gem> currentMatches = new List<Gem>();
     // private void Awake()
     // {
     //     // board = FindObjectOfType<Board>();
     // }
     public void FindAllGemMatches()
     {
-        
+        // currentMatches.Clear();
         for (int i = 0; i < board.width; i++)
         {
             for (int j = 0; j < board.height; j++)
@@ -33,6 +36,10 @@ public class MatchFinder : MonoBehaviour
                                 currentGem.b_IsMatched = true;
                                 leftGem.b_IsMatched = true;
                                 rightGem.b_IsMatched = true;
+                                
+                                currentMatches.Add(currentGem);
+                                currentMatches.Add(rightGem);
+                                currentMatches.Add(leftGem);
                             }
                         }
                     }
@@ -48,11 +55,21 @@ public class MatchFinder : MonoBehaviour
                                 currentGem.b_IsMatched = true;
                                 aboveGem.b_IsMatched = true;
                                 belowGem.b_IsMatched = true;
+                                
+                                currentMatches.Add(currentGem);
+                                currentMatches.Add(aboveGem);
+                                currentMatches.Add(belowGem);
                             }
                         }
                     }
                 }
+                
             }
+        }
+
+        if (currentMatches.Count > 0)
+        {
+            currentMatches = currentMatches.Distinct().ToList();
         }
     }
 }

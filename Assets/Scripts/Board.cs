@@ -14,12 +14,8 @@ public class Board : MonoBehaviour
     public Gem[] gems;
     public Gem[,] allGems;
 
-    [SerializeReference] private MatchFinder matchFind;
-    // private void Awake()
-    // {
-    //     matchFind = FindObjectOfType<MatchFinder>();
-    // }
-    
+    public MatchFinder matchFind;
+
     void Start()
     {
         allGems = new Gem[width, height];

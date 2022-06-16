@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Enums;
 using UnityEngine;
 
@@ -18,8 +19,9 @@ public class Gem : MonoBehaviour
     private Gem neighborGem;
 
     public bool b_IsMatched;
+    private Vector2Int previousPos;
 
-    // Update is called once per frame
+    
     void Update()
     {
         if (Vector2.Distance(transform.position, posIndex) > .01f)
@@ -67,6 +69,7 @@ public class Gem : MonoBehaviour
 
     private void MovePieces()
     {
+        previousPos = posIndex;
         // Right swipe
         if (swipeAngle is > -45 and < 45 && posIndex.x < board.width - 1)
         {
@@ -97,8 +100,28 @@ public class Gem : MonoBehaviour
             neighborGem.posIndex.x++;
             posIndex.x--;
         }
-
+        // Ensuring if the gems are on correct position.
         board.allGems[posIndex.x, posIndex.y] = this;
         board.allGems[neighborGem.posIndex.x, neighborGem.posIndex.y] = neighborGem;
+
+        StartCoroutine(CheckMove());
+    }
+
+    private IEnumerator CheckMove()     // Check if there's a match with move if not then return back to it's position.
+    {
+        yield return new WaitForSeconds(.5f);
+        board.matchFind.FindAllGemMatches();
+
+        if (neighborGem != null)
+        {
+            if (!b_IsMatched && !neighborGem.b_IsMatched)
+            {
+                neighborGem.posIndex = posIndex;
+                posIndex = previousPos;
+                
+                board.allGems[posIndex.x, posIndex.y] = this;
+                board.allGems[neighborGem.posIndex.x, neighborGem.posIndex.y] = neighborGem;
+            }
+        }
     }
 }

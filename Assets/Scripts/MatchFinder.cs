@@ -66,7 +66,7 @@ public class MatchFinder : MonoBehaviour
                 
             }
         }
-
+        // ensuring list only contains distinct values.
         if (currentMatches.Count > 0)
         {
             currentMatches = currentMatches.Distinct().ToList();

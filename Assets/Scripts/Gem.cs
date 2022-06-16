@@ -1,13 +1,13 @@
 using System;
+using Enums;
 using UnityEngine;
 
 public class Gem : MonoBehaviour
-{   
+{
+    [HideInInspector] public Vector2Int posIndex;
+    public GemType type;
     
-    // [HideInInspector]
-    public Vector2Int posIndex;
-    // [HideInInspector]
-    public Board board;
+    [HideInInspector] public Board board;
 
     private Vector2 firstTouchPosition;
     private Vector2 finalTouchPosition;
@@ -16,6 +16,8 @@ public class Gem : MonoBehaviour
     private float swipeAngle;
 
     private Gem neighborGem;
+
+    public bool b_IsMatched;
 
     // Update is called once per frame
     void Update()

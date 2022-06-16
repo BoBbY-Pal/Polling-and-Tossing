@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,10 +14,21 @@ public class Board : MonoBehaviour
     public Gem[] gems;
     public Gem[,] allGems;
 
+    [SerializeReference] private MatchFinder matchFind;
+    // private void Awake()
+    // {
+    //     matchFind = FindObjectOfType<MatchFinder>();
+    // }
+    
     void Start()
     {
         allGems = new Gem[width, height];
         Setup();
+    }
+
+    private void Update()
+    {
+        matchFind.FindAllGemMatches();
     }
 
     private void Setup()

@@ -7,13 +7,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -84045273752763111, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.86410254
+      objectReference: {fileID: 0}
+    - target: {fileID: -84045273752763111, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.93846154
+      objectReference: {fileID: 0}
+    - target: {fileID: 2337052358783866190, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
+      propertyPath: type
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2624750049957547654, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 6bb7c00a68de1634cbee8574d8499804, type: 3}
     - target: {fileID: 6801420106726621569, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
       propertyPath: m_Name
-      value: Gem - Yellow
+      value: Gem - Yellow Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7302971701652252911, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
       propertyPath: m_RootOrder

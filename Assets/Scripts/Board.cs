@@ -25,11 +25,6 @@ public class Board : MonoBehaviour
         Setup();
     }
 
-    private void Update()
-    {
-        matchFind.FindAllGemMatches();
-    }
-
     private void Setup()
     {
         for (int i = 0; i < width; i++)
@@ -92,9 +87,9 @@ public class Board : MonoBehaviour
         {
             if (allGems[pos.x, pos.y].b_IsMatched)
             {
+                Instantiate(allGems[pos.x, pos.y].destroyEffect, new Vector2(pos.x, pos.y), Quaternion.identity);
                 Destroy(allGems[pos.x, pos.y].gameObject);
                 allGems[pos.x, pos.y] = null;
-                // matchFind.currentMatches.Remove(allGems[pos.x, pos.y]);
             }
         }
     }
@@ -145,7 +140,7 @@ public class Board : MonoBehaviour
         
         if (matchFind.currentMatches.Count > 0)     // Destroying new matches after refilling.
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(.5f);
             DestroyMatches();
         }
         else

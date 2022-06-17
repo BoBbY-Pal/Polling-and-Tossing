@@ -7,7 +7,7 @@ public class Gem : MonoBehaviour
 {
     [HideInInspector] public Vector2Int posIndex;
     public GemType type;
-    
+    public GameObject destroyEffect;
     [HideInInspector] public Board board;
 
     private Vector2 firstTouchPosition;

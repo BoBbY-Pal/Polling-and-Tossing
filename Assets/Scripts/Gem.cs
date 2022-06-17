@@ -37,15 +37,21 @@ public class Gem : MonoBehaviour
         if (b_MousePressed && Input.GetMouseButtonUp(0))
         {
             b_MousePressed = false;
-            finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            CalculateSwipeAngle();
+            if (board.currenState == BoardState.Move)
+            {
+                finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                CalculateSwipeAngle();
+            }
         }
     }
 
     private void OnMouseDown()
     {
-        if (Camera.main != null) firstTouchPosition = Camera.main.ScreenToWorldPoint( Input.mousePosition );
-        b_MousePressed = true;
+        if (board.currenState ==  BoardState.Move)
+        {
+            if (Camera.main != null) firstTouchPosition = Camera.main.ScreenToWorldPoint( Input.mousePosition );
+            b_MousePressed = true;
+        }
     }
     
     public void SetupGem(Vector2Int pos, Board theBoard)
@@ -109,6 +115,8 @@ public class Gem : MonoBehaviour
 
     private IEnumerator CheckMove()     // Check if there's a match with move if not then return back to it's position.
     {
+        board.currenState = BoardState.Wait;
+        
         yield return new WaitForSeconds(.5f);
         board.matchFind.FindAllGemMatches();
 
@@ -121,6 +129,9 @@ public class Gem : MonoBehaviour
                 
                 board.allGems[posIndex.x, posIndex.y] = this;
                 board.allGems[neighborGem.posIndex.x, neighborGem.posIndex.y] = neighborGem;
+
+                yield return new WaitForSeconds(.5f);
+                board.currenState = BoardState.Move;
             }
             else
             {

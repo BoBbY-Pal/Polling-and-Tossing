@@ -1,7 +1,7 @@
-
 using System.Collections;
-using System.Collections.Generic;
+
 using System.Linq;
+using Enums;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,9 +16,9 @@ public class Board : MonoBehaviour
     
     public Gem[] gems;
     public Gem[,] allGems;
-
+    
     public MatchFinder matchFind;
-
+    public BoardState currenState = BoardState.Move;
     void Start()
     {
         allGems = new Gem[width, height];
@@ -57,7 +57,7 @@ public class Board : MonoBehaviour
 
     private void SpawnGem(Vector2Int pos, Gem gemToSpawn)   // using vec2Int becoz we need a whole value.
     {
-        Gem gem = Instantiate(gemToSpawn, new Vector3(pos.x, pos.y, 0), Quaternion.identity);
+        Gem gem = Instantiate(gemToSpawn, new Vector3(pos.x, pos.y + height, 0), Quaternion.identity);
         gem.transform.parent = transform;
         gem.name = "Gem (" + pos.x + "," + pos.y + ")";
         allGems[pos.x, pos.y] = gem;    // Storing it in 2D array so that i can access it.
@@ -147,7 +147,12 @@ public class Board : MonoBehaviour
         {
             yield return new WaitForSeconds(1.5f);
             DestroyMatches();
-        } 
+        }
+        else
+        {
+            yield return new WaitForSeconds(.5f);
+            currenState = BoardState.Move;
+        }
     }
 
     private void RefillBoard()

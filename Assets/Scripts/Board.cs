@@ -1,5 +1,6 @@
 
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -141,8 +142,8 @@ public class Board : MonoBehaviour
         
         yield return new WaitForSeconds(.5f);
         matchFind.FindAllGemMatches();
-
-        if (matchFind.currentMatches.Count > 0)
+        
+        if (matchFind.currentMatches.Count > 0)     // Destroying new matches after refilling.
         {
             yield return new WaitForSeconds(1.5f);
             DestroyMatches();
@@ -156,9 +157,33 @@ public class Board : MonoBehaviour
             for (int j = 0; j < height; j++)
             {
                 if (allGems[i, j] != null) continue;
+                
                 int gemToUse = Random.Range(0, gems.Length);
                 SpawnGem(new Vector2Int(i,j), gems[ gemToUse] );
             }
         }
+        // CheckMisplacedGems();
     }
+
+    // private void CheckMisplacedGems()
+    // {
+    //     List<Gem> gemsInScene = new List<Gem>();
+    //     gemsInScene.AddRange(FindObjectsOfType<Gem>());
+    //     
+    //     for (int i = 0; i < width; i++)
+    //     {
+    //         for (int j = 0; j < height; j++)
+    //         {
+    //             if (gemsInScene.Contains(allGems[i, j]))
+    //             {
+    //                 gemsInScene.Remove(allGems[i, j]);
+    //             }
+    //         }
+    //     }
+    //
+    //     foreach (Gem g in gemsInScene)
+    //     {
+    //         Destroy(g.gameObject);
+    //     }
+    // }
 }

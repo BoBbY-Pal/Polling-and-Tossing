@@ -6,19 +6,40 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 
-public class Board : MonoBehaviour
+public class BoardManager : MonoBehaviour
 {
+    #region variables
+    [Header("Board Properties")]
+    
+    [Tooltip("The Width of the board.")] 
     public int width;
+    
+    [Tooltip("The Height of the board.")] 
     public int height;
-    public float gemTransitionSpeed;
-
+    
+    [Tooltip("The Prefab of background tile.")] 
     public GameObject tileBgPrefab;
     
+    [Tooltip("Reference of Gem match finder.")]
+    public GemMatchFinder matchFind;
+    
+    [Header("Gem Properties")]
+    
+    [Tooltip("The transition speed in which gems move from one place to another.")] 
+    public float gemTransitionSpeed;
+    public Gem bomb;
+    
+    [Tooltip("The number of spawning chances of bomb.")] 
+    public float bombChance = 2f;
+    
+    [Tooltip("Add different different gems here which you wants to have in the game.")]
     public Gem[] gems;
     public Gem[,] allGems;
+     
+    [HideInInspector] public BoardState currenState = BoardState.Move;
+    #endregion
     
-    public MatchFinder matchFind;
-    public BoardState currenState = BoardState.Move;
+    
     void Start()
     {
         allGems = new Gem[width, height];
@@ -52,6 +73,10 @@ public class Board : MonoBehaviour
 
     private void SpawnGem(Vector2Int pos, Gem gemToSpawn)   // using vec2Int becoz we need a whole value.
     {
+        if (Random.Range(0f, 100f) < bombChance)
+        {
+            gemToSpawn = bomb;
+        }
         Gem gem = Instantiate(gemToSpawn, new Vector3(pos.x, pos.y + height, 0), Quaternion.identity);
         gem.transform.parent = transform;
         gem.name = "Gem (" + pos.x + "," + pos.y + ")";

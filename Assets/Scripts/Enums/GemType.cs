@@ -7,6 +7,7 @@
         Green,
         Blue,
         Yellow,
-        Purple
+        Purple,
+        Bomb
     }
 }

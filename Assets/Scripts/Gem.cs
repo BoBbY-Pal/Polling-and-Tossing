@@ -5,10 +5,16 @@ using UnityEngine;
 
 public class Gem : MonoBehaviour
 {
+    #region Variables
+
     [HideInInspector] public Vector2Int posIndex;
+    [Tooltip("Select type of the Gem.")] 
     public GemType type;
+    
+    [Tooltip("Add particle effect which you wants to play when this type of gem get destroyed.")] 
     public GameObject destroyEffect;
-    [HideInInspector] public Board board;
+    
+    [HideInInspector] public BoardManager boardManager;
 
     private Vector2 firstTouchPosition;
     private Vector2 finalTouchPosition;
@@ -21,23 +27,26 @@ public class Gem : MonoBehaviour
     public bool b_IsMatched;
     private Vector2Int previousPos;
 
+    public int bombBlastRadius = 2;
+
+    #endregion
     
     void Update()
     {
         if (Vector2.Distance(transform.position, posIndex) > .01f)
         {
-            transform.position = Vector2.Lerp(transform.position, posIndex, board.gemTransitionSpeed * Time.deltaTime);
+            transform.position = Vector2.Lerp(transform.position, posIndex, boardManager.gemTransitionSpeed * Time.deltaTime);
         }
         else
         {
             transform.position = new Vector3(posIndex.x, posIndex.y, 0f);
-            board.allGems[posIndex.x, posIndex.y] = this;
+            boardManager.allGems[posIndex.x, posIndex.y] = this;
         }
         
         if (b_MousePressed && Input.GetMouseButtonUp(0))
         {
             b_MousePressed = false;
-            if (board.currenState == BoardState.Move)
+            if (boardManager.currenState == BoardState.Move)
             {
                 finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 CalculateSwipeAngle();
@@ -47,17 +56,17 @@ public class Gem : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (board.currenState ==  BoardState.Move)
+        if (boardManager.currenState ==  BoardState.Move)
         {
             if (Camera.main != null) firstTouchPosition = Camera.main.ScreenToWorldPoint( Input.mousePosition );
             b_MousePressed = true;
         }
     }
     
-    public void SetupGem(Vector2Int pos, Board theBoard)
+    public void SetupGem(Vector2Int pos, BoardManager theBoardManager)
     {
         posIndex = pos;
-        board = theBoard;
+        boardManager = theBoardManager;
     }
     
     private void CalculateSwipeAngle()
@@ -77,17 +86,17 @@ public class Gem : MonoBehaviour
     {
         previousPos = posIndex;
         // Right swipe
-        if (swipeAngle is > -45 and < 45 && posIndex.x < board.width - 1)
+        if (swipeAngle is > -45 and < 45 && posIndex.x < boardManager.width - 1)
         {
-            neighborGem = board.allGems[posIndex.x + 1, posIndex.y];
+            neighborGem = boardManager.allGems[posIndex.x + 1, posIndex.y];
             neighborGem.posIndex.x--;
             posIndex.x++;
 
         }
         // Up swipe
-        else if (swipeAngle is > 45 and <= 135 && posIndex.y < board.height - 1)
+        else if (swipeAngle is > 45 and <= 135 && posIndex.y < boardManager.height - 1)
         {
-            neighborGem = board.allGems[posIndex.x, posIndex.y + 1];
+            neighborGem = boardManager.allGems[posIndex.x, posIndex.y + 1];
             neighborGem.posIndex.y--;
             posIndex.y++;
 
@@ -95,30 +104,30 @@ public class Gem : MonoBehaviour
         // Down swipe
         else if (swipeAngle is >= -135 and < -45 && posIndex.y > 0)
         {
-            neighborGem = board.allGems[posIndex.x, posIndex.y - 1];
+            neighborGem = boardManager.allGems[posIndex.x, posIndex.y - 1];
             neighborGem.posIndex.y++;
             posIndex.y--;
         }
         // left swipe
         else if (swipeAngle > 135 || swipeAngle <= -135 && posIndex.x > 0)
         {
-            neighborGem = board.allGems[posIndex.x - 1, posIndex.y];
+            neighborGem = boardManager.allGems[posIndex.x - 1, posIndex.y];
             neighborGem.posIndex.x++;
             posIndex.x--;
         }
         // Ensuring if the gems are on correct position.
-        board.allGems[posIndex.x, posIndex.y] = this;
-        board.allGems[neighborGem.posIndex.x, neighborGem.posIndex.y] = neighborGem;
+        boardManager.allGems[posIndex.x, posIndex.y] = this;
+        boardManager.allGems[neighborGem.posIndex.x, neighborGem.posIndex.y] = neighborGem;
 
         StartCoroutine(CheckMove());
     }
 
     private IEnumerator CheckMove()     // Check if there's a match with move if not then return back to it's position.
     {
-        board.currenState = BoardState.Wait;
+        boardManager.currenState = BoardState.Wait;
         
         yield return new WaitForSeconds(.5f);
-        board.matchFind.FindAllGemMatches();
+        boardManager.matchFind.FindAllGemMatches();
 
         if (neighborGem != null)
         {
@@ -127,15 +136,15 @@ public class Gem : MonoBehaviour
                 neighborGem.posIndex = posIndex;
                 posIndex = previousPos;
                 
-                board.allGems[posIndex.x, posIndex.y] = this;
-                board.allGems[neighborGem.posIndex.x, neighborGem.posIndex.y] = neighborGem;
+                boardManager.allGems[posIndex.x, posIndex.y] = this;
+                boardManager.allGems[neighborGem.posIndex.x, neighborGem.posIndex.y] = neighborGem;
 
                 yield return new WaitForSeconds(.5f);
-                board.currenState = BoardState.Move;
+                boardManager.currenState = BoardState.Move;
             }
             else
             {
-                board.DestroyMatches();
+                boardManager.DestroyMatches();
             }
         }
     }

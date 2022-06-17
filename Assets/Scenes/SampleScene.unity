@@ -238,15 +238,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 7
   height: 7
-  gemTransitionSpeed: 7
   tileBgPrefab: {fileID: 6490645704314675659, guid: 12cc346aa4f5f2d458222da9c8fd7c49, type: 3}
+  matchFind: {fileID: 1489846834}
+  gemTransitionSpeed: 7
+  bomb: {fileID: 6962647310992963368, guid: 9e110557375da6147b13409897ec6adc, type: 3}
+  bombChance: 2
   gems:
   - {fileID: 2337052358783866190, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
   - {fileID: 3720545620941325136, guid: 0baaee76f2430a6499d20c7b440d2248, type: 3}
   - {fileID: 5757276331912667762, guid: 02a783862d9f33e47a8e529cdb4407e5, type: 3}
   - {fileID: 6102158465651322648, guid: 69b01074b0e00a14e8560bc304a5338d, type: 3}
   - {fileID: 5504530879634125718, guid: ea60936461c494d4aafc7680d74477a5, type: 3}
-  matchFind: {fileID: 1489846834}
   currenState: 1
 --- !u!4 &730250247
 Transform:
@@ -292,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21eafff77a8789649a4f1527d7afae2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  board: {fileID: 730250246}
+  boardManager: {fileID: 730250246}
   currentMatches: []
 --- !u!4 &1489846835
 Transform:

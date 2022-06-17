@@ -38,7 +38,7 @@ public class Gem : MonoBehaviour
         {
             b_MousePressed = false;
             finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            CalculateAngle();
+            CalculateSwipeAngle();
         }
     }
 
@@ -54,7 +54,7 @@ public class Gem : MonoBehaviour
         board = theBoard;
     }
     
-    private void CalculateAngle()
+    private void CalculateSwipeAngle()
     {
         swipeAngle = Mathf.Atan2(finalTouchPosition.y - firstTouchPosition.y,
                                  finalTouchPosition.x - firstTouchPosition.x);

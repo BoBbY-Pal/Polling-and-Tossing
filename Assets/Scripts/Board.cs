@@ -1,6 +1,6 @@
 
 using System.Collections;
-using System.Security.Cryptography;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -43,7 +43,7 @@ public class Board : MonoBehaviour
                 int gemToUse = Random.Range(0, gems.Length);
 
                 int iterations = 0; // By this will Make sure we will not end up in a crashing of game due to excessive iterations.
-                while (MatchesAt(new Vector2Int(i,j), gems[gemToUse]) && iterations < 100)  
+                while (MatchesInBeginning(new Vector2Int(i,j), gems[gemToUse]) && iterations < 100)  
                 {
                     gemToUse = Random.Range(0, gems.Length);
                     iterations++;
@@ -64,7 +64,7 @@ public class Board : MonoBehaviour
         gem.SetupGem(pos, this);
     }
 
-    private bool MatchesAt(Vector2Int posToCheck, Gem gemToCheck)    // Ensures that there's no match exist in the beginning of game.
+    private bool MatchesInBeginning(Vector2Int posToCheck, Gem gemToCheck)    // Ensures that there's no match exist in the beginning of game.
     {
         if (posToCheck.x > 1)
         {
@@ -85,7 +85,7 @@ public class Board : MonoBehaviour
         return false;
     }
 
-    private void DestroyMatchedGemAt(Vector2Int pos)
+    private void DestroyMatchesAt(Vector2Int pos)
     {
         if (allGems[pos.x, pos.y] != null)
         {
@@ -93,18 +93,16 @@ public class Board : MonoBehaviour
             {
                 Destroy(allGems[pos.x, pos.y].gameObject);
                 allGems[pos.x, pos.y] = null;
+                // matchFind.currentMatches.Remove(allGems[pos.x, pos.y]);
             }
         }
     }
 
     public void DestroyMatches()
     {
-        for (int i = 0; i < matchFind.currentMatches.Count; i++)
+        foreach (var gem in matchFind.currentMatches.Where(gem => gem != null))
         {
-            if (matchFind.currentMatches[i] != null)
-            {
-                DestroyMatchedGemAt(matchFind.currentMatches[i].posIndex);
-            }
+            DestroyMatchesAt(gem.posIndex);
         }
 
         StartCoroutine(RowFallDown());
@@ -131,6 +129,36 @@ public class Board : MonoBehaviour
             }
 
             emptySlotCounter = 0;
+        }
+        
+        StartCoroutine(FillBoard());
+    }
+
+    private IEnumerator FillBoard()
+    {
+        yield return new WaitForSeconds(.5f);
+        RefillBoard();
+        
+        yield return new WaitForSeconds(.5f);
+        matchFind.FindAllGemMatches();
+
+        if (matchFind.currentMatches.Count > 0)
+        {
+            yield return new WaitForSeconds(1.5f);
+            DestroyMatches();
+        } 
+    }
+
+    private void RefillBoard()
+    {
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                if (allGems[i, j] != null) continue;
+                int gemToUse = Random.Range(0, gems.Length);
+                SpawnGem(new Vector2Int(i,j), gems[ gemToUse] );
+            }
         }
     }
 }

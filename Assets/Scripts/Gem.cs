@@ -33,16 +33,22 @@ public class Gem : MonoBehaviour
     
     void Update()
     {
+        CheckSwipe();
+    }
+
+    private void CheckSwipe()
+    {
         if (Vector2.Distance(transform.position, posIndex) > .01f)
         {
-            transform.position = Vector2.Lerp(transform.position, posIndex, boardManager.gemTransitionSpeed * Time.deltaTime);
+            transform.position =Vector2.Lerp(transform.position, posIndex,
+                                                    boardManager.gemTransitionSpeed * Time.deltaTime);
         }
         else
         {
             transform.position = new Vector3(posIndex.x, posIndex.y, 0f);
             boardManager.allGems[posIndex.x, posIndex.y] = this;
         }
-        
+
         if (b_MousePressed && Input.GetMouseButtonUp(0))
         {
             b_MousePressed = false;

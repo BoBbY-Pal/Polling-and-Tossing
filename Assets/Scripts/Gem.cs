@@ -27,7 +27,7 @@ public class Gem : MonoBehaviour
     public bool b_IsMatched;
     private Vector2Int previousPos;
 
-    public int bombBlastRadius = 2;
+    public int bombBlastRadius = 1;
 
     #endregion
     

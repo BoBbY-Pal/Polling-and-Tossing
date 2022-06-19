@@ -1,5 +1,4 @@
 using System.Collections;
-
 using System.Linq;
 using Enums;
 using UnityEngine;
@@ -9,8 +8,8 @@ using Random = UnityEngine.Random;
 public class BoardManager : MonoBehaviour
 {
     #region variables
-    [Header("Board Properties")]
     
+    [Header("Board Properties")]
     [Tooltip("The Width of the board.")] 
     public int width;
     
@@ -24,7 +23,6 @@ public class BoardManager : MonoBehaviour
     public GemMatchFinder matchFind;
     
     [Header("Gem Properties")]
-    
     [Tooltip("The transition speed in which gems move from one place to another.")] 
     public float gemTransitionSpeed;
     public Gem bomb;

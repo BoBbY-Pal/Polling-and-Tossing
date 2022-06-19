@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GemMatchFinder : MonoBehaviour
 {
-    public BoardManager boardManager;
+    public BoardManager board;
 
     public List<Gem> currentMatches = new List<Gem>();
     
@@ -14,20 +14,20 @@ public class GemMatchFinder : MonoBehaviour
     {
         currentMatches.Clear();
         
-        for (int i = 0; i < boardManager.width; i++)
+        for (int i = 0; i < board.width; i++)
         {
-            for (int j = 0; j < boardManager.height; j++)
+            for (int j = 0; j < board.height; j++)
             {
-                Gem currentGem = boardManager.allGems[i, j];
+                Gem currentGem = board.allGems[i, j];
                 
                 
                 if (currentGem != null)
                 {
                     // Horizontal match
-                    if (i > 0 && i < boardManager.width - 1)
+                    if (i > 0 && i < board.width - 1)
                     {
-                        Gem leftGem = boardManager.allGems[i - 1, j];
-                        Gem rightGem = boardManager.allGems[i + 1, j];
+                        Gem leftGem = board.allGems[i - 1, j];
+                        Gem rightGem = board.allGems[i + 1, j];
                         if (leftGem != null && rightGem != null)
                         {
                             if (leftGem.type == currentGem.type && rightGem.type == currentGem.type)
@@ -44,10 +44,10 @@ public class GemMatchFinder : MonoBehaviour
                     }
                     
                     // Vertical match
-                    if (j > 0 && j < boardManager.height - 1)
+                    if (j > 0 && j < board.height - 1)
                     {
-                        Gem aboveGem = boardManager.allGems[i, j +1];
-                        Gem belowGem = boardManager.allGems[i, j -1];
+                        Gem aboveGem = board.allGems[i, j + 1];
+                        Gem belowGem = board.allGems[i, j - 1];
                         if (aboveGem != null && belowGem != null)
                         {
                             if (aboveGem.type == currentGem.type && belowGem.type == currentGem.type)
@@ -86,44 +86,44 @@ public class GemMatchFinder : MonoBehaviour
             // Left Check
             if (gem.posIndex.x > 0)
             {
-                if (boardManager.allGems[x - 1, y] != null)
+                if (board.allGems[x - 1, y] != null)
                 {
-                    if (boardManager.allGems[x - 1, y].type == GemType.Bomb)
+                    if (board.allGems[x - 1, y].type == GemType.Bomb)
                     {
-                        MarkBombArea(new Vector2Int(x - 1, y), boardManager.allGems[x-1, y]);
+                        MarkBombArea(new Vector2Int(x - 1, y), board.allGems[x-1, y]);
                     }
                 }
             }
             // Right Check
-            if (gem.posIndex.x < boardManager.width - 1)
+            if (gem.posIndex.x < board.width - 1)
             {
-                if (boardManager.allGems[x + 1, y] != null)
+                if (board.allGems[x + 1, y] != null)
                 {
-                    if (boardManager.allGems[x + 1, y].type == GemType.Bomb)
+                    if (board.allGems[x + 1, y].type == GemType.Bomb)
                     {
-                        MarkBombArea(new Vector2Int(x + 1, y), boardManager.allGems[x + 1, y]);
+                        MarkBombArea(new Vector2Int(x + 1, y), board.allGems[x + 1, y]);
                     }
                 }
             }
             // Down Check
             if (gem.posIndex.y > 0)
             {
-                if (boardManager.allGems[x, y - 1] != null)
+                if (board.allGems[x, y - 1] != null)
                 {
-                    if (boardManager.allGems[x, y - 1].type == GemType.Bomb)
+                    if (board.allGems[x, y - 1].type == GemType.Bomb)
                     {
-                        MarkBombArea(new Vector2Int(x, y - 1), boardManager.allGems[x, y - 1]);
+                        MarkBombArea(new Vector2Int(x, y - 1), board.allGems[x, y - 1]);
                     }
                 }
             }
             // Up Check
-            if (gem.posIndex.y < boardManager.height - 1)
+            if (gem.posIndex.y < board.height - 1)
             {
-                if (boardManager.allGems[x, y + 1] != null)
+                if (board.allGems[x, y + 1] != null)
                 {
-                    if (boardManager.allGems[x, y + 1].type == GemType.Bomb)
+                    if (board.allGems[x, y + 1].type == GemType.Bomb)
                     {
-                        MarkBombArea(new Vector2Int(x ,y + 1), boardManager.allGems[x, y + 1 ]);
+                        MarkBombArea(new Vector2Int(x ,y + 1), board.allGems[x, y + 1 ]);
                     }
                 }
             }
@@ -137,12 +137,12 @@ public class GemMatchFinder : MonoBehaviour
         {
             for (int y = bombPos.y - theBomb.bombBlastRadius; y <= bombPos.y + theBomb.bombBlastRadius; y++)
             {
-                if (x >= 0 && x < boardManager.width && y >= 0 && y < boardManager.height)
+                if (x >= 0 && x < board.width && y >= 0 && y < board.height)
                 {
-                    if (boardManager.allGems[x, y] != null)
+                    if (board.allGems[x, y] != null)
                     {
-                        boardManager.allGems[x, y].b_IsMatched = true;
-                        currentMatches.Add(boardManager.allGems[x, y]);
+                        board.allGems[x, y].b_IsMatched = true;
+                        currentMatches.Add(board.allGems[x, y]);
                     }
                 }
             }

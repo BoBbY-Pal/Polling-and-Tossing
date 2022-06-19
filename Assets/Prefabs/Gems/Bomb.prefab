@@ -103,6 +103,7 @@ MonoBehaviour:
   destroyEffect: {fileID: 9066327402155879376, guid: 552e47d906e5c1440aabdfb61b2fe280, type: 3}
   boardManager: {fileID: 0}
   b_IsMatched: 0
+  bombBlastRadius: 1
 --- !u!61 &4475385260652619647
 BoxCollider2D:
   m_ObjectHideFlags: 0

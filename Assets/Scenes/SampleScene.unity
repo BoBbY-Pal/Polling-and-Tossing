@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21eafff77a8789649a4f1527d7afae2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boardManager: {fileID: 730250246}
+  board: {fileID: 730250246}
   currentMatches: []
 --- !u!4 &1489846835
 Transform:

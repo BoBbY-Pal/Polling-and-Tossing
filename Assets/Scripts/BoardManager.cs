@@ -5,7 +5,6 @@ using Enums;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-
 public class BoardManager : MonoBehaviour
 {
     #region variables
@@ -58,11 +57,8 @@ public class BoardManager : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                Vector2 pos = new Vector2(i, j);
-                GameObject bgTile = Instantiate(tileBgPrefab, pos, Quaternion.identity);
-                bgTile.transform.parent = transform;
-                bgTile.name = "BG Tile (" + i + "," + j + ")";
-                
+                Factory.Instance.SpawnTile(tileBgPrefab, new Vector2Int(i, j), this);
+
                 int gemToUse = Random.Range(0, gems.Length);
 
                 int iterations = 0; // By this will Make sure we will not end up in a crashing of game due to excessive iterations.
@@ -72,24 +68,24 @@ public class BoardManager : MonoBehaviour
                     iterations++;
                 }
 
-                SpawnGem(new Vector2Int(i,j), gems[gemToUse]);
+                Factory.Instance.SpawnGem(new Vector2Int(i,j), gems[gemToUse], this);
             }
         }
     }
 
-    private void SpawnGem(Vector2Int pos, Gem gemToSpawn)   // using vec2Int becoz we need a whole value.
-    {
-        if (Random.Range(0f, 100f) < bombChance)
-        {
-            gemToSpawn = bomb;
-        }
-        Gem gem = Instantiate(gemToSpawn, new Vector3(pos.x, pos.y + height, 0), Quaternion.identity);
-        gem.transform.parent = transform;
-        gem.name = "Gem (" + pos.x + "," + pos.y + ")";
-        allGems[pos.x, pos.y] = gem;    // Storing it in 2D array so that i can access it.
-
-        gem.SetupGem(pos, this);
-    }
+    // private void SpawnGem(Vector2Int pos, Gem gemToSpawn)   // using vec2Int becoz we need a whole value.
+    // {
+    //     if (Random.Range(0f, 100f) < bombChance)
+    //     {
+    //         gemToSpawn = bomb;
+    //     }
+    //     Gem gem = Instantiate(gemToSpawn, new Vector3(pos.x, pos.y + height, 0), Quaternion.identity);
+    //     gem.transform.parent = transform;
+    //     gem.name = "Gem (" + pos.x + "," + pos.y + ")";
+    //     allGems[pos.x, pos.y] = gem;    // Storing it in 2D array so that i can access it.
+    //
+    //     gem.SetupGem(pos, this);
+    // }
 
     private bool MatchesAt(Vector2Int posToCheck, Gem gemToCheck)    // Ensures that there's no match exist in the beginning of game.
     {
@@ -190,7 +186,7 @@ public class BoardManager : MonoBehaviour
                 if (allGems[i, j] != null) continue;
                 
                 int gemToUse = Random.Range(0, gems.Length);
-                SpawnGem(new Vector2Int(i,j), gems[ gemToUse] );
+                Factory.Instance.SpawnGem(new Vector2Int(i,j), gems[ gemToUse], this);
             }
         }
         CheckMisplacedGems();

@@ -829,7 +829,6 @@ MonoBehaviour:
   width: 7
   height: 7
   tileBgPrefab: {fileID: 6490645704314675659, guid: 12cc346aa4f5f2d458222da9c8fd7c49, type: 3}
-  matchFind: {fileID: 1489846834}
   gemTransitionSpeed: 10
   bomb: {fileID: 4157618416460693640, guid: 9e110557375da6147b13409897ec6adc, type: 3}
   bombChance: 2
@@ -1626,10 +1625,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1787607410}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccbf6a2954594e21a3147d5fc16dc76e, type: 3}
+  m_Script: {fileID: 11500000, guid: 70053abe60b8bef40b06deb5c4ac3dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileBgPrefab: {fileID: 6490645704314675659, guid: 12cc346aa4f5f2d458222da9c8fd7c49, type: 3}
 --- !u!4 &1787607412
 Transform:
   m_ObjectHideFlags: 0
@@ -1671,15 +1669,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1888102467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc9af7f88da14cfbbb22eb2379de2762, type: 3}
+  m_Script: {fileID: 11500000, guid: ae5a2f3d95ea4f1791ebdf2dc1a58dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gemTransitionSpeed: 2
-  bomb: {fileID: 4157618416460693640, guid: 9e110557375da6147b13409897ec6adc, type: 3}
-  bombChance: 2
-  matchFind: {fileID: 1489846834}
-  board: {fileID: 0}
-  currenState: 1
+  matchFinder: {fileID: 1489846834}
 --- !u!4 &1888102469
 Transform:
   m_ObjectHideFlags: 0

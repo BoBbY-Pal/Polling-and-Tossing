@@ -29,6 +29,8 @@ public class BoardManager : MonoBehaviour
     public Gem[,] boardGrid;
      
     [HideInInspector] public BoardState currenState = BoardState.Move;
+
+    public RoundManager roundManager;
     #endregion
 
     private void Start()

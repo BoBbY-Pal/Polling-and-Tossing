@@ -37,7 +37,7 @@ public class Gem : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (boardManager.currenState ==  BoardState.Move)
+        if (boardManager.currenState ==  BoardState.Move && boardManager.roundManager.roundTime > 0)
         {
             if (Camera.main != null) firstTouchPosition = Camera.main.ScreenToWorldPoint( Input.mousePosition );
             b_MousePressed = true;
@@ -60,7 +60,7 @@ public class Gem : MonoBehaviour
         if (b_MousePressed && Input.GetMouseButtonUp(0))
         {
             b_MousePressed = false;
-            if (boardManager.currenState == BoardState.Move)
+            if (boardManager.currenState == BoardState.Move && boardManager.roundManager.roundTime > 0)
             {
                 if (Camera.main != null) finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 CalculateSwipeAngle();

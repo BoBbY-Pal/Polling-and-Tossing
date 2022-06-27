@@ -8,6 +8,8 @@ using UnityEngine;
 public class GameManager : MonoGenericSingleton<GameManager>
 {
     public BoardManager board;
+    public RoundManager roundManager;
+    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.X))
@@ -33,6 +35,7 @@ public class GameManager : MonoGenericSingleton<GameManager>
     {
         foreach (var gem in MatchFinder.Instance.currentMatches.Where(gem => gem != null))
         {
+            AddScore(gem);
             DestroyMatchesAt(gem.posIndex);
         }
 
@@ -169,5 +172,10 @@ public class GameManager : MonoGenericSingleton<GameManager>
             }
             StartCoroutine(FillBoard());
         }
+    }
+
+    private void AddScore(Gem gemToCheck)
+    {
+        roundManager.currentScore += gemToCheck.scoreValue;
     }
 }

@@ -11,6 +11,9 @@ public class RoundManager : MonoBehaviour
     private bool endingRound = false;
     public BoardManager board;
 
+    public int currentScore;
+    public float displayScore;
+    public int scoreTransitionSpeed;
     private void Awake()
     {
         _uiManager = FindObjectOfType<UIManager>();
@@ -35,8 +38,15 @@ public class RoundManager : MonoBehaviour
             WinCheck();
             endingRound = false;
         }
-        
         _uiManager.timeText.text = roundTime.ToString("0.0") + "s";
+        
+        DisplayScore();
+    }
+
+    private void DisplayScore()
+    {
+        displayScore = Mathf.Lerp(displayScore, currentScore, scoreTransitionSpeed * Time.deltaTime);
+        _uiManager.scoreText.text = displayScore.ToString("0");
     }
 
     private void WinCheck()

@@ -30,7 +30,7 @@ public class BoardManager : MonoBehaviour
      
     [HideInInspector] public BoardState currenState = BoardState.Move;
 
-    public RoundManager roundManager;
+    
     #endregion
 
     private void Start()

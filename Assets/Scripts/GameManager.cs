@@ -9,6 +9,9 @@ public class GameManager : MonoGenericSingleton<GameManager>
 {
     public BoardManager board;
     public RoundManager roundManager;
+
+    private int bonusMultiplier;
+    private float bonusAmmount = .5f;
     
     private void Update()
     {
@@ -78,11 +81,13 @@ public class GameManager : MonoGenericSingleton<GameManager>
         
         if (MatchFinder.Instance.currentMatches.Count > 0)     // Destroying new matches after refilling.
         {
+            bonusMultiplier++;
             yield return new WaitForSeconds(.5f);
             DestroyMatches();
         }
         else
         {
+            bonusMultiplier = 0;
             yield return new WaitForSeconds(.5f);
             board.currenState = BoardState.Move;
         }
@@ -177,5 +182,11 @@ public class GameManager : MonoGenericSingleton<GameManager>
     private void AddScore(Gem gemToCheck)
     {
         roundManager.currentScore += gemToCheck.scoreValue;
+
+        if (bonusMultiplier > 0)
+        {
+            float bonusToAdd = gemToCheck.scoreValue * bonusMultiplier * bonusAmmount;
+            roundManager.currentScore += Mathf.RoundToInt(bonusToAdd);
+        }
     }
 }

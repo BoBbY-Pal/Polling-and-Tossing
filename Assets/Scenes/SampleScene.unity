@@ -879,7 +879,6 @@ MonoBehaviour:
   - {fileID: 6102158465651322648, guid: 69b01074b0e00a14e8560bc304a5338d, type: 3}
   - {fileID: 5504530879634125718, guid: ea60936461c494d4aafc7680d74477a5, type: 3}
   currenState: 1
-  roundManager: {fileID: 848079648}
 --- !u!4 &730250247
 Transform:
   m_ObjectHideFlags: 0
@@ -1011,8 +1010,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bbefb5d7180526488d94f1b2644fb4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundTime: 2
+  roundTime: 60
   board: {fileID: 730250246}
+  currentScore: 0
+  displayScore: 0
+  scoreTransitionSpeed: 5
 --- !u!4 &848079649
 Transform:
   m_ObjectHideFlags: 0
@@ -2061,6 +2063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 730250246}
+  roundManager: {fileID: 848079648}
 --- !u!4 &1888102469
 Transform:
   m_ObjectHideFlags: 0

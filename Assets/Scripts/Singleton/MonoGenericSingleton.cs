@@ -3,18 +3,17 @@ namespace Singleton
 {
     public class MonoGenericSingleton<T> : MonoBehaviour where T: MonoGenericSingleton<T>
     {
-        private static T _instance;
-        public static T Instance => _instance;
+        public static T Instance { get; private set; }
 
         protected virtual void Awake()
         {
-            if (_instance != null)
+            if (Instance != null)
             {
                 Destroy(gameObject);
             }
             else
             {
-                _instance = (T) this;
+                Instance = (T) this;
                 DontDestroyOnLoad(gameObject);
             }
         }

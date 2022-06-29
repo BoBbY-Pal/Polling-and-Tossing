@@ -182,7 +182,8 @@ public class GameManager : MonoGenericSingleton<GameManager>
     private void AddScore(Gem gemToCheck)
     {
         roundManager.currentScore += gemToCheck.scoreValue;
-
+        
+        // Bonus score
         if (bonusMultiplier > 0)
         {
             float bonusToAdd = gemToCheck.scoreValue * bonusMultiplier * bonusAmmount;

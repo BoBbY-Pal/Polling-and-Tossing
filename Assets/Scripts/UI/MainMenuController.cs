@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace UI
 {
-    public class MainMenu : MonoBehaviour
+    public class MainMenuController : MonoBehaviour
     {
         public void StartGame()
         {
@@ -12,6 +13,11 @@ namespace UI
         public void QuitGame()
         {
             Application.Quit();
+        }
+
+        public void GoToMainMenu()
+        {
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }

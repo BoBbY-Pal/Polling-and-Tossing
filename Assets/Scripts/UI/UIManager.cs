@@ -1,7 +1,8 @@
+using Singleton;
 using TMPro;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoGenericSingleton<UIManager>
 {
     public TMP_Text timeText;
     public TMP_Text scoreText;

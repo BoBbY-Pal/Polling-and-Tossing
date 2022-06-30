@@ -1,10 +1,9 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace UI
 {
-    public class MainMenuController : MonoBehaviour
+    public class MainMenuManager : MonoBehaviour
     {
         public void StartGame()
         {

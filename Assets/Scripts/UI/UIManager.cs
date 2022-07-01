@@ -12,7 +12,6 @@ public class UIManager : MonoGenericSingleton<UIManager>
     public GameObject[] stars;
     
     public GameObject roundOverScreen;
-    // private RoundManager _roundManager;
 
     private void Start()
     {

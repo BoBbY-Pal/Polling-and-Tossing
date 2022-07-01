@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Enums;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoundManager : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class RoundManager : MonoBehaviour
     private bool b_RoundEnd;
     public BoardManager board;
 
-    [HideInInspector] public int currentScore;
+    //[HideInInspector]
+    public int currentScore;
     private float displayScore;
     public int scoreTransitionSpeed;
 
@@ -85,10 +87,14 @@ public class RoundManager : MonoBehaviour
             starsEarned = 0;
             UIManager.Instance.congoText.text = "Oh no! No stars for you, Wanna try again?";
         }
+        //Storing earned stars in a local disk. 
+        PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "StarsEarned", starsEarned);
         
+        // Show how many stars user earned while playing game.
         for (int i = 0; i < starsEarned; i++)
-        {
+        {   
             UIManager.Instance.stars[i].SetActive(true);
+            
         }
     }
 }

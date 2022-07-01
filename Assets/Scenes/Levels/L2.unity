@@ -1105,7 +1105,7 @@ MonoBehaviour:
   board: {fileID: 730250246}
   currentScore: 0
   scoreTransitionSpeed: 5
-  scoreTarget1Star: 1500
+  scoreTarget1Star: 1000
   scoreTarget2Star: 2500
   scoreTarget3Star: 3500
 --- !u!4 &848079649

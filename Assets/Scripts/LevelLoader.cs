@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using System;
+using Enums;
 using Managers;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -7,6 +8,17 @@ using UnityEngine;
 public class LevelLoader : MonoBehaviour 
 {
     public string levelToLoad;
+    public GameObject[] stars;
+
+    private void Start()
+    {
+        int starsEarned = PlayerPrefs.GetInt(levelToLoad + "StarsEarned");
+
+        for (int i = 0; i < starsEarned; i++)
+        {
+            stars[i].SetActive(true);
+        }
+    }
 
     public void LoadLevel()
     {   

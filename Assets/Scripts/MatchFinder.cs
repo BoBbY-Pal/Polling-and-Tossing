@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Enums;
+using Managers;
 using Singleton;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ public class MatchFinder : MonoGenericSingleton<MatchFinder>
                         Gem rightGem = board.boardGrid[i + 1, j];
                         if (leftGem != null && rightGem != null)
                         {
-                            if (leftGem.type == currentGem.type && rightGem.type == currentGem.type)
+                            if (leftGem.type == currentGem.type && rightGem.type == currentGem.type && currentGem.type != GemType.Stone)
                             {
                                 currentGem.b_IsMatched = true;
                                 leftGem.b_IsMatched = true;
@@ -50,7 +51,7 @@ public class MatchFinder : MonoGenericSingleton<MatchFinder>
                         Gem belowGem = board.boardGrid[i, j - 1];
                         if (aboveGem != null && belowGem != null)
                         {
-                            if (aboveGem.type == currentGem.type && belowGem.type == currentGem.type)
+                            if (aboveGem.type == currentGem.type && belowGem.type == currentGem.type && currentGem.type != GemType.Stone)
                             {
                                 currentGem.b_IsMatched = true;
                                 aboveGem.b_IsMatched = true;

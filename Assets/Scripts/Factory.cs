@@ -1,4 +1,5 @@
-﻿using Singleton;
+﻿using Managers;
+using Singleton;
 using UnityEngine;
 
 public class Factory : MonoGenericSingleton<Factory>

@@ -8,6 +8,7 @@
         Blue,
         Yellow,
         Purple,
-        Bomb
+        Bomb,
+        Stone
     }
 }

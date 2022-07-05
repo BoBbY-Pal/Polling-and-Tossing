@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using Enums;
+using Managers;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 public class Gem : MonoBehaviour

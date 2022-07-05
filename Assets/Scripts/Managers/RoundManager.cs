@@ -91,6 +91,8 @@ public class RoundManager : MonoBehaviour
         //Storing earned stars in a local disk. 
         PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "StarsEarned", starsEarned);
         
+        SFXManager.Instance.PlayRoundOverSound();
+        
         // Show how many stars user earned while playing game.
         for (int i = 0; i < starsEarned; i++)
         {   

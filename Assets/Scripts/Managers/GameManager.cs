@@ -28,6 +28,19 @@ public class GameManager : MonoGenericSingleton<GameManager>
         {
             if (board.boardGrid[pos.x, pos.y].b_IsMatched)
             {
+                switch (board.boardGrid[pos.x, pos.y].type)
+                {
+                    case GemType.Bomb:
+                        SFXManager.Instance.PlayExplosionSound();
+                        break;
+                    case GemType.Stone:
+                        SFXManager.Instance.PlayStoneBreakSound();
+                        break;
+                    default:
+                        SFXManager.Instance.PlayGemBreakSound();
+                        break;
+                }
+                
                 Instantiate(board.boardGrid[pos.x, pos.y].destroyEffect, new Vector2(pos.x, pos.y), Quaternion.identity);
                 Destroy(board.boardGrid[pos.x, pos.y].gameObject);
                 board.boardGrid[pos.x, pos.y] = null;

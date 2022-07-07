@@ -8,6 +8,8 @@
         Blue,
         Yellow,
         Purple,
+        Pink,
+        Silver,
         Bomb,
         Stone
     }

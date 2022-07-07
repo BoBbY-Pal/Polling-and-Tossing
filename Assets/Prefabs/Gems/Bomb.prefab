@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   posIndex: {x: 0, y: 0}
-  type: 6
+  type: 8
   destroyEffect: {fileID: 7295231755716214767, guid: e85ff5b6341b4b84cb35efff7e0fafe6, type: 3}
   boardManager: {fileID: 0}
   b_IsMatched: 0

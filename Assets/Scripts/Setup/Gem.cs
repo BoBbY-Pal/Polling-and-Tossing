@@ -4,6 +4,7 @@ using Enums;
 using Managers;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gem : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class Gem : MonoBehaviour
     public GameObject destroyEffect;
     
     [HideInInspector] public BoardManager boardManager;
-
+    
     private Vector2 firstTouchPosition;
     private Vector2 finalTouchPosition;
     private float swipeAngle;
@@ -41,7 +42,7 @@ public class Gem : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (boardManager.currenState ==  BoardState.Move && GameManager.Instance.roundManager.roundTime > 0 )
+        if (GameManager.Instance.currenState ==  BoardState.Move && GameManager.Instance.roundManager.roundTime > 0 )
         {
             if (Camera.main != null) firstTouchPosition = Camera.main.ScreenToWorldPoint( Input.mousePosition );
             b_MousePressed = true;
@@ -64,7 +65,7 @@ public class Gem : MonoBehaviour
         if (b_MousePressed && Input.GetMouseButtonUp(0))
         {
             b_MousePressed = false;
-            if (boardManager.currenState == BoardState.Move && GameManager.Instance.roundManager.roundTime > 0)
+            if (GameManager.Instance.currenState == BoardState.Move && GameManager.Instance.roundManager.roundTime > 0)
             {
                 if (Camera.main != null) finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 CalculateSwipeAngle();
@@ -132,10 +133,10 @@ public class Gem : MonoBehaviour
 
     private IEnumerator CheckMove()     // Check if there's a match with move if not then return back to it's position.
     {
-        boardManager.currenState = BoardState.Wait;
+        GameManager.Instance.currenState = BoardState.Wait;
         
         yield return new WaitForSeconds(.5f);
-        MatchFinder.Instance.FindAllGemMatches();
+        GameManager.Instance.matchFinder.FindAllGemMatches();
 
         if (neighborGem != null)
         {
@@ -148,7 +149,7 @@ public class Gem : MonoBehaviour
                 boardManager.boardGrid[neighborGem.posIndex.x, neighborGem.posIndex.y] = neighborGem;
 
                 yield return new WaitForSeconds(.5f);
-                boardManager.currenState = BoardState.Move;
+                GameManager.Instance.currenState = BoardState.Move;
             }
             else
             {

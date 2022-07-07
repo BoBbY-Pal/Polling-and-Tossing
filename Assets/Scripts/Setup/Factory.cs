@@ -14,9 +14,9 @@ public class Factory : MonoGenericSingleton<Factory>
     
     public void SpawnGem(Vector2Int pos, Gem gemToSpawn, BoardManager board)   
     {
-        if (Random.Range(0f, 100f) < board.bombChance ) //GameManager.Instance.bombChance)
+        if (Random.Range(0f, 100f) < board.bombChance )
         {
-            gemToSpawn = board.bomb;  //GameManager.Instance.bomb;
+            gemToSpawn = board.bomb;  
         }
         Gem gem = Instantiate(gemToSpawn, new Vector3(pos.x, pos.y + board.height, 0), Quaternion.identity);
         // gemsInScene.Add(gem);

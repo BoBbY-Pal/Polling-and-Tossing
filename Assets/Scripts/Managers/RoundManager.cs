@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Enums;
 using Managers;
 using UnityEngine;
@@ -10,7 +8,6 @@ public class RoundManager : MonoBehaviour
     public float roundTime = 60f;
 
     private bool b_RoundEnd;
-    public BoardManager board;
 
     //[HideInInspector]
     public int currentScore;
@@ -18,6 +15,7 @@ public class RoundManager : MonoBehaviour
     public int scoreTransitionSpeed;
 
     private int starsEarned;
+    private int prevStarsEarned;
     
     [Header("Score Targets")]
     [Tooltip("When player hits target score player will get stars according to that.")]
@@ -43,7 +41,7 @@ public class RoundManager : MonoBehaviour
             }
         }
 
-        if (b_RoundEnd && board.currenState == BoardState.Move)
+        if (b_RoundEnd && GameManager.Instance.currenState == BoardState.Move)
         {
             WinCheck();
             b_RoundEnd = false;
@@ -88,8 +86,14 @@ public class RoundManager : MonoBehaviour
             starsEarned = 0;
             UIManager.Instance.congoText.text = "Oh no! No stars for you, Wanna try again?";
         }
+        
+        // Fetching past earned stars. 
+        prevStarsEarned = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "StarsEarned");
         //Storing earned stars in a local disk. 
-        PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "StarsEarned", starsEarned);
+        if (starsEarned > prevStarsEarned)
+        {
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "StarsEarned", starsEarned);
+        }
         
         SFXManager.Instance.PlayRoundOverSound();
         
@@ -97,7 +101,6 @@ public class RoundManager : MonoBehaviour
         for (int i = 0; i < starsEarned; i++)
         {   
             UIManager.Instance.stars[i].SetActive(true);
-            
         }
     }
 }

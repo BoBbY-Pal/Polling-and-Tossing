@@ -1,4 +1,4 @@
-using Enums;
+using ScriptableObject;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,38 +8,40 @@ namespace Managers
     {
         #region variables
     
-        [Header("Board Properties")]
-        [Tooltip("The Width of the board.")] 
+        [HideInInspector]
         public int width;
     
-        [Tooltip("The Height of the board.")] 
+        [HideInInspector] 
         public int height;
     
-        [Tooltip("The Prefab of background tile.")] 
+        [HideInInspector]
         public GameObject tileBgPrefab;
 
-        [Header("Gem Properties")]
-        [Tooltip("The transition speed in which gems move from one place to another.")] 
+        [HideInInspector]
         public float gemTransitionSpeed;
+        [HideInInspector]
         public Gem bomb;
-    
-        [Tooltip("The number of spawning chances of bomb.")] 
+        
+        [HideInInspector]
         public float bombChance = 2f;
-    
-        [Tooltip("Add different different gems here which you wants to have in the game.")]
+        [HideInInspector]
+        public int bombBlastRadius = 1;
+        
+        [HideInInspector]
         public Gem[] gems;
         public Gem[,] boardGrid;
-     
-        [HideInInspector] public BoardState currenState = BoardState.Move;
 
         private BoardLayout _boardLayout;
         private Gem[,] _storedLayout;
-    
+
+        public LevelScriptableObject levelData;
+
         #endregion
 
         private void Awake()
         {
             _boardLayout = GetComponent<BoardLayout>();
+            FetchData();
         }
 
         private void Start()
@@ -50,6 +52,18 @@ namespace Managers
             _storedLayout = new Gem[width, height];
         }
 
+        private void FetchData()
+        {
+            width = levelData.boardWidth;
+            height = levelData.boardHeight;
+            tileBgPrefab = levelData.tileBgPrefab;
+            gemTransitionSpeed = levelData.gemTransitionSpeed;
+            bomb = levelData.bomb;
+            bombChance = levelData.bombChance;
+            gems = levelData.gems;
+            bombBlastRadius = levelData.bombBlastRadius;
+        }
+        
         private void SetupBoard()
         {
             if (_boardLayout != null)
@@ -111,5 +125,6 @@ namespace Managers
 
             return false;
         }
+        
     }
 }

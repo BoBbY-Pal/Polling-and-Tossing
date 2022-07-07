@@ -1,27 +1,38 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Enums;
 using Managers;
 using Singleton;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class GameManager : MonoGenericSingleton<GameManager>
+public class GameManager : MonoBehaviour
 {
-    public BoardManager board;
     public RoundManager roundManager;
-
+    public MatchFinder matchFinder;
+   
+    [HideInInspector] 
+    public BoardManager board;
+    
     private int bonusMultiplier;
     private float bonusAmmount = .5f;
-    
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            ShuffleBoard();
-        }
-    }
 
+    [HideInInspector] 
+    public BoardState currenState = BoardState.Move;
+    public static GameManager Instance { get; private set; }
+    
+    private void Awake()
+    {
+        Instance = this;
+    }
+    
+    public BoardManager GetBoardRef()
+    {
+        return board;
+    }
+    
     private void DestroyMatchesAt(Vector2Int pos)
     {
         if (board.boardGrid[pos.x, pos.y] != null )
@@ -40,7 +51,6 @@ public class GameManager : MonoGenericSingleton<GameManager>
                         SFXManager.Instance.PlayGemBreakSound();
                         break;
                 }
-                
                 Instantiate(board.boardGrid[pos.x, pos.y].destroyEffect, new Vector2(pos.x, pos.y), Quaternion.identity);
                 Destroy(board.boardGrid[pos.x, pos.y].gameObject);
                 board.boardGrid[pos.x, pos.y] = null;
@@ -50,7 +60,7 @@ public class GameManager : MonoGenericSingleton<GameManager>
     
     public void DestroyMatches()
     {
-        foreach (var gem in MatchFinder.Instance.currentMatches.Where(gem => gem != null))
+        foreach (var gem in matchFinder.currentMatches.Where(gem => gem != null))
         {
             AddScore(gem);
             DestroyMatchesAt(gem.posIndex);
@@ -91,9 +101,9 @@ public class GameManager : MonoGenericSingleton<GameManager>
         RefillBoard();
         
         yield return new WaitForSeconds(.5f);
-        MatchFinder.Instance.FindAllGemMatches();
+        matchFinder.FindAllGemMatches();
         
-        if (MatchFinder.Instance.currentMatches.Count > 0)     // Destroying new matches after refilling.
+        if (matchFinder.currentMatches.Count > 0)     // Destroying new matches after refilling.
         {
             bonusMultiplier++;
             yield return new WaitForSeconds(.5f);
@@ -103,7 +113,7 @@ public class GameManager : MonoGenericSingleton<GameManager>
         {
             bonusMultiplier = 0;
             yield return new WaitForSeconds(.5f);
-            board.currenState = BoardState.Move;
+            currenState = BoardState.Move;
         }
     }
 
@@ -155,11 +165,11 @@ public class GameManager : MonoGenericSingleton<GameManager>
         }
     }*/
     
-    private void ShuffleBoard()
+    public void ShuffleBoard()
     {
-        if (board.currenState != BoardState.Wait)
+        if (currenState != BoardState.Wait)
         {
-            board.currenState = BoardState.Wait;
+            currenState = BoardState.Wait;
             List<Gem> gemsFromBoard = new List<Gem>();
             
             for (int x = 0; x < board.width; x++)

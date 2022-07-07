@@ -1,9 +1,9 @@
+using Managers;
 using UnityEngine;
 
 public class BoardLayout : MonoBehaviour
 {
     public  GemLayoutRow[] allRows;
-
     public Gem[,] GetLayout()
     {   
         

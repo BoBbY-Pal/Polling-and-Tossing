@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7402685802018243039
+--- !u!1001 &290005026857542246
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,31 +9,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -84045273752763111, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.9102564
+      value: 0.9179487
       objectReference: {fileID: 0}
     - target: {fileID: -84045273752763111, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.92820513
+      value: 0.93846154
       objectReference: {fileID: 0}
     - target: {fileID: 2337052358783866190, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
       propertyPath: type
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2337052358783866190, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
       propertyPath: scoreValue
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: 2337052358783866190, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
-      propertyPath: destroyEffect
-      value: 
-      objectReference: {fileID: 7180391194708294713, guid: 3751bcc227a98f544a9fe684c8b9c202, type: 3}
     - target: {fileID: 2624750049957547654, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c3d70ddde63f0d0478d00a378987eed2, type: 3}
+      objectReference: {fileID: 21300000, guid: ad0e520e8ba21b347ab3119195856b11, type: 3}
     - target: {fileID: 6801420106726621569, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
       propertyPath: m_Name
-      value: Stone Variant
+      value: Gem - Silver Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7302971701652252911, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
       propertyPath: m_RootOrder

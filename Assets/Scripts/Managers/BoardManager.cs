@@ -41,7 +41,7 @@ namespace Managers
         private void Awake()
         {
             _boardLayout = GetComponent<BoardLayout>();
-            FetchData();
+            FetchLevelData();
         }
 
         private void Start()
@@ -52,7 +52,7 @@ namespace Managers
             _storedLayout = new Gem[width, height];
         }
 
-        private void FetchData()
+        private void FetchLevelData()
         {
             width = levelData.boardWidth;
             height = levelData.boardHeight;

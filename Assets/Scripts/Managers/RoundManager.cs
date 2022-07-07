@@ -1,25 +1,43 @@
+using System;
 using Enums;
 using Managers;
+using ScriptableObject;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class RoundManager : MonoBehaviour
 {
+    [SerializeField]
+    private TargetScoreSO targetScoreSO;
+    
+    [HideInInspector]
     public float roundTime = 60f;
-
     private bool b_RoundEnd;
 
     //[HideInInspector]
-    public int currentScore;
-    private float displayScore;
+    public int currentScore;        // Current score of the game.
+    private float displayScore;     // Score that fill be displayed on the screen.
+    
+    [Tooltip("How fast score changes")]
     public int scoreTransitionSpeed;
 
     private int starsEarned;
     private int prevStarsEarned;
     
-    [Header("Score Targets")]
-    [Tooltip("When player hits target score player will get stars according to that.")]
-    [SerializeField] private int scoreTarget1Star, scoreTarget2Star, scoreTarget3Star;
+    private int star1scoreTarget, star2scoreTarget, star3scoreTarget;
+
+    private void Awake()
+    {
+        GetTargetScores();
+    }
+
+    private void GetTargetScores()
+    {
+        roundTime = targetScoreSO.roundTime;
+        star1scoreTarget = targetScoreSO.star1ScoreTarget;
+        star2scoreTarget = targetScoreSO.star2ScoreTarget;
+        star3scoreTarget = targetScoreSO.star3ScoreTarget;
+    }
 
     void Update()
     {
@@ -62,20 +80,20 @@ public class RoundManager : MonoBehaviour
 
         UIManager.Instance.finalScore.text = currentScore.ToString();
 
-        if (currentScore >= scoreTarget1Star && currentScore < scoreTarget2Star)
+        if (currentScore >= star1scoreTarget && currentScore < star2scoreTarget)
         {
              starsEarned = 1;
             UIManager.Instance.congoText.text = "Congratulations you earned " + starsEarned + " star!";
         }
 
-        else if ( currentScore >= scoreTarget2Star && currentScore < scoreTarget3Star)
+        else if ( currentScore >= star2scoreTarget && currentScore < star3scoreTarget)
         {
             starsEarned = 2;
             UIManager.Instance.congoText.text = "Congratulations you earned " + starsEarned + " stars!";
             
         }
 
-        else if (currentScore >= scoreTarget3Star)
+        else if (currentScore >= star3scoreTarget)
         {
             starsEarned = 3;
             UIManager.Instance.congoText.text = "Congratulations you earned " + starsEarned + " stars!";

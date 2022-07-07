@@ -2,7 +2,7 @@
 
 namespace ScriptableObject
 {
-    [CreateAssetMenu( fileName = "LevelScriptableObject", menuName = "ScriptableObject/Level/NewScriptableObject")] 
+    [CreateAssetMenu( fileName = "LevelSO", menuName = "ScriptableObject/Level/LevelScriptableObject")] 
     public class LevelScriptableObject : UnityEngine.ScriptableObject
     {
         [Header("Board Properties")]
@@ -23,7 +23,7 @@ namespace ScriptableObject
         [Tooltip("Spawning chances of bomb.")] 
         public float bombChance = 5f;
         
-        [Tooltip("Blast radius of bomb. 1 means it will destroy 1 gem around the bomb from all of the four directions.")] 
+        [Tooltip("Blast radius of the bomb! 1 means it will destroy 1 gem around the bomb from all of the four directions.")] 
         public int bombBlastRadius = 1;
         
         [Tooltip("Add different different gems here which you wants to have in the game.")]
@@ -31,6 +31,6 @@ namespace ScriptableObject
         
         [Tooltip("The Prefab of bomb.")] 
         public Gem bomb;
-
+        
     }
 }

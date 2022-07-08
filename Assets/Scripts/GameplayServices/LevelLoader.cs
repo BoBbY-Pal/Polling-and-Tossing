@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections;
 using Enums;
 using Managers;
 using UnityEngine.UI;
@@ -10,6 +10,8 @@ public class LevelLoader : MonoBehaviour
     public string levelToLoad;
     public GameObject[] stars;
 
+    public GameObject levelLockedWarning;
+    
     private void Start()
     {
         int starsEarned = PlayerPrefs.GetInt(levelToLoad + "StarsEarned");
@@ -26,18 +28,26 @@ public class LevelLoader : MonoBehaviour
         switch (levelStatus) {
             
             case LevelStatus.Locked:
-                // SoundManager.Instance.Play(Sounds.ButtonClick);
-                Debug.Log("This level is locked!!");
-                SceneManager.LoadScene(levelToLoad);
+                SoundManager.Instance.Play(Sounds.ButtonClick);
+                levelLockedWarning.SetActive(true);
+                
+                StartCoroutine(WaitFewSeconds());
                 break;
             case LevelStatus.Unlocked:
-                // SoundManager.Instance.Play(Sounds.ButtonClick);
+                SoundManager.Instance.Play(Sounds.ButtonClick);
                 SceneManager.LoadScene(levelToLoad);
                 break;
             case LevelStatus.Completed:
-                // SoundManager.Instance.Play(Sounds.ButtonClick);
+                SoundManager.Instance.Play(Sounds.ButtonClick);
                 SceneManager.LoadScene(levelToLoad);
                 break;
         }
+
+         
+    }
+    IEnumerator WaitFewSeconds()
+    {
+        yield return new WaitForSeconds(2);
+        levelLockedWarning.SetActive(false);
     }
 }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Round2
   m_EditorClassIdentifier: 
   roundTime: 70
-  star1ScoreTarget: 1500
-  star2ScoreTarget: 2000
-  star3ScoreTarget: 2500
+  star1ScoreTarget: 3500
+  star2ScoreTarget: 4500
+  star3ScoreTarget: 6000

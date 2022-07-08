@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3401b033ae3e4b6ea7478882de2320cf, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  boardWidth: 8
-  boardHeight: 8
+  boardWidth: 7
+  boardHeight: 7
   tileBgPrefab: {fileID: 6490645704314675659, guid: 12cc346aa4f5f2d458222da9c8fd7c49, type: 3}
   gemTransitionSpeed: 15
-  bombChance: 8
+  bombChance: 4
   bombBlastRadius: 2
   gems:
   - {fileID: 2337052358783866190, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}

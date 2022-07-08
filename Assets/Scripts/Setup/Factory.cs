@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Factory : MonoGenericSingleton<Factory>
 {
-    // public static readonly List<Gem> gemsInScene = new List<Gem>();
     public void SpawnTile(GameObject tileBgPrefab, Vector2 pos, BoardManager board)
     {
         GameObject bgTile = Instantiate(tileBgPrefab, pos, Quaternion.identity);
@@ -19,8 +18,7 @@ public class Factory : MonoGenericSingleton<Factory>
             gemToSpawn = board.bomb;  
         }
         Gem gem = Instantiate(gemToSpawn, new Vector3(pos.x, pos.y + board.height, 0), Quaternion.identity);
-        // gemsInScene.Add(gem);
-        
+
         gem.transform.parent = board.transform;
         gem.name = "Gem (" + pos.x + "," + pos.y + ")";
         board.boardGrid[pos.x, pos.y] = gem;    // Storing it in 2D array so that i can access it.

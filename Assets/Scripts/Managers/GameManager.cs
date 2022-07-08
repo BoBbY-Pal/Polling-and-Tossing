@@ -42,13 +42,16 @@ public class GameManager : MonoBehaviour
                 switch (board.boardGrid[pos.x, pos.y].type)
                 {
                     case GemType.Bomb:
-                        SFXManager.Instance.PlayExplosionSound();
+                        // SoundManager.Instance.PlayExplosionSound();
+                      SoundManager.Instance.Play(Sounds.BombExplode);  
                         break;
                     case GemType.Stone:
-                        SFXManager.Instance.PlayStoneBreakSound();
+                        // SoundManager.Instance.PlayStoneBreakSound();
+                        SoundManager.Instance.Play(Sounds.StoneBreak);
                         break;
                     default:
-                        SFXManager.Instance.PlayGemBreakSound();
+                        // SoundManager.Instance.PlayGemBreakSound();
+                        SoundManager.Instance.Play(Sounds.GemBreak);
                         break;
                 }
                 Instantiate(board.boardGrid[pos.x, pos.y].destroyEffect, new Vector2(pos.x, pos.y), Quaternion.identity);
@@ -129,42 +132,8 @@ public class GameManager : MonoBehaviour
                 Factory.Instance.SpawnGem(new Vector2Int(i,j), board.gems[ gemToUse], board);
             }
         }
-        // CheckMisplacedGems();
     }
 
-    /*private void CheckMisplacedGems()
-    {
-        // List<Gem> gemsInScene = new List<Gem>();
-        // gemsInScene.AddRange(FindObjectsOfType<Gem>());
-
-        
-        
-        for (int i = 0; i < board.width; i++)
-        {
-            for (int j = 0; j < board.height; j++)
-            {
-                foreach (Gem gem in Factory.gemsInScene)
-                {
-                    if (gem == board.boardGrid[i, j])
-                    {
-                        Factory.gemsInScene.Remove(board.boardGrid[i, j]);
-                        // Destroy(gem.gameObject);
-                    }
-                }
-                
-                // if (gemsInScene.Contains(board.boardGrid[i, j]))
-                // {
-                //     gemsInScene.Remove(board.boardGrid[i, j]);
-                // }
-            }
-        }
-        
-        foreach (Gem g in Factory.gemsInScene)
-        {
-            Destroy(g.gameObject);
-        }
-    }*/
-    
     public void ShuffleBoard()
     {
         if (currenState != BoardState.Wait)

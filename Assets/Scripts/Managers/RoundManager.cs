@@ -61,7 +61,7 @@ public class RoundManager : MonoBehaviour
 
         if (b_RoundEnd && GameManager.Instance.currenState == BoardState.Move)
         {
-            WinCheck();
+            RoundOver();
             b_RoundEnd = false;
         }
 
@@ -74,11 +74,13 @@ public class RoundManager : MonoBehaviour
         UIManager.Instance.scoreText.text = displayScore.ToString("0");
     }
 
-    private void WinCheck()
+    private void RoundOver()
     {
         UIManager.Instance.roundOverScreen.SetActive(true);
-
+    
         UIManager.Instance.finalScore.text = currentScore.ToString();
+        
+        SoundManager.Instance.Play(Sounds.RoundOver);
 
         if (currentScore >= star1scoreTarget && currentScore < star2scoreTarget)
         {
@@ -105,16 +107,21 @@ public class RoundManager : MonoBehaviour
             UIManager.Instance.congoText.text = "Oh no! No stars for you, Wanna try again?";
         }
         
+        //  Check whether user completed the level or not..
+        if (starsEarned >= 2)
+        {
+            LevelManager.Instance.MarkLevelComplete();
+        }
+            
         // Fetching past earned stars. 
         prevStarsEarned = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "StarsEarned");
+        
         //Storing earned stars in a local disk. 
         if (starsEarned > prevStarsEarned)
         {
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "StarsEarned", starsEarned);
         }
-        
-        SFXManager.Instance.PlayRoundOverSound();
-        
+
         // Show how many stars user earned while playing game.
         for (int i = 0; i < starsEarned; i++)
         {   

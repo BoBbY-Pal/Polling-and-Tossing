@@ -1,3 +1,5 @@
+using System;
+using Enums;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,6 +9,16 @@ namespace Managers
     public class UIManager : MonoBehaviour
     {
         public static UIManager Instance { get; private set; }
+
+        public TMP_Text timeText;
+        public TMP_Text scoreText;
+
+        public TMP_Text finalScore;
+        public TMP_Text congoText;
+        public GameObject[] stars;
+    
+        public GameObject roundOverScreen;
+        public GameObject pauseScreen;
     
         private void Awake()
         {
@@ -19,17 +31,6 @@ namespace Managers
                 Instance = this;
             }
         }
-
-        public TMP_Text timeText;
-        public TMP_Text scoreText;
-
-        public TMP_Text finalScore;
-        public TMP_Text congoText;
-        public GameObject[] stars;
-    
-        public GameObject roundOverScreen;
-        public GameObject pauseScreen;
-    
         private void Start()
         {
             foreach (GameObject t in stars)
@@ -37,9 +38,19 @@ namespace Managers
                 t.SetActive(false);
             }
         }
-  
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                PauseUnpauseScreen();
+            }
+        }
+
         public void PauseUnpauseScreen()
         {
+            SoundManager.Instance.Play(Sounds.ButtonClick);
+            
             if (!pauseScreen.activeInHierarchy)
             {
                 pauseScreen.SetActive(true);
@@ -55,17 +66,20 @@ namespace Managers
 
         public void ShuffleBoard()
         {
+            SoundManager.Instance.Play(Sounds.ButtonClick);
             GameManager.Instance.ShuffleBoard();
         }
 
         public void GoToLevelSelect()
         {
+            SoundManager.Instance.Play(Sounds.ButtonClick);
             Time.timeScale = 1f;
             pauseScreen.SetActive(false);
             SceneManager.LoadScene("LevelSelection");
         }
         public void ExitGame()
         {
+            SoundManager.Instance.Play(Sounds.ButtonClick);
             Time.timeScale = 1f;
             pauseScreen.SetActive(false);
             SceneManager.LoadScene("MainMenu");
@@ -73,6 +87,7 @@ namespace Managers
 
         public void TryAgain()
         {
+            SoundManager.Instance.Play(Sounds.ButtonClick);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             roundOverScreen.SetActive(false);
         }

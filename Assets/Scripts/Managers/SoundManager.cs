@@ -1,46 +1,68 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.Audio;
 using Enums;
 using Singleton;
 using UnityEngine;
-using Random = UnityEngine.Random;
+
 
 public class SoundManager : MonoGenericSingleton<SoundManager>
 {
     [SerializeField]
-    // private AudioSource gemBreakSound, explodeSound, stoneBreakSound, roundOverSound;
 
     public AudioSource soundEffect;
-    public AudioSource soundMusic;
-    public SoundType[] sounds;
+    public Sounds[] sound;
+
     
-    public void Play(Sounds sound)
+    public void Play(SoundTypes soundType)
     {
-        AudioClip clip = GetSoundClip(sound);
+        SetVolume(soundType);
+        
+        AudioClip clip = GetSoundClip(soundType);
         if (clip != null)
         {
             soundEffect.PlayOneShot(clip);
         }
         else
         {
-            Debug.Log("Clip not found for sound type: " + sound);
+            Debug.Log("Clip not found for sound type: " + soundType);
         }
     }
 
-    private AudioClip GetSoundClip(Sounds sound)
+    private void SetVolume(SoundTypes soundType)
     {
-        SoundType soundType = Array.Find(sounds, item => item.soundType == sound);
-        if (soundType != null)
-            return soundType.soundClip;
+        Sounds sounds = Array.Find(sound, item => item.soundType == soundType);
+        
+        // If it is muted then don't play any sound.
+        if (sounds.b_IsMute)
+        {
+            soundEffect.mute = true;
+        }
+        else
+        {
+            soundEffect.mute = false;
+            soundEffect.volume = sounds.volume;
+        }
+
+    }
+
+    private AudioClip GetSoundClip(SoundTypes soundType)
+    {
+        Sounds sounds = Array.Find(sound, item => item.soundType == soundType);
+        
+        if (sounds != null)
+            return sounds.soundClip;
         return null;
 
     }
 }
 
 [Serializable]
-public class SoundType
+public class Sounds
 {
-    public Sounds soundType;
+   
+    public SoundTypes soundType;
     public AudioClip soundClip;
+
+    public bool b_IsMute = false;
+    [Range(0f, 1f)] public float volume;
 }

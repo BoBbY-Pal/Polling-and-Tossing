@@ -29,7 +29,7 @@ public class Gem : MonoBehaviour
     private Gem neighborGem;
     private Vector2Int previousPos;
     
-    public int bombBlastRadius = 1;
+    // public int bombBlastRadius = 1;
 
     public int scoreValue = 10;
     
@@ -84,7 +84,7 @@ public class Gem : MonoBehaviour
         swipeAngle = Mathf.Atan2(finalTouchPosition.y - firstTouchPosition.y,
                                  finalTouchPosition.x - firstTouchPosition.x);
         swipeAngle = swipeAngle * 180 / MathF.PI;
-        Debug.Log(swipeAngle);
+        GameLogManager.CustomLog(swipeAngle);
 
         if (Vector3.Distance(firstTouchPosition, finalTouchPosition ) > 0.5f)
         {

@@ -49,7 +49,7 @@ namespace Managers
 
         public void PauseUnpauseScreen()
         {
-            SoundManager.Instance.Play(Sounds.ButtonClick);
+            SoundManager.Instance.Play(SoundTypes.ButtonClick);
             
             if (!pauseScreen.activeInHierarchy)
             {
@@ -66,20 +66,20 @@ namespace Managers
 
         public void ShuffleBoard()
         {
-            SoundManager.Instance.Play(Sounds.ButtonClick);
+            SoundManager.Instance.Play(SoundTypes.ButtonClick);
             GameManager.Instance.ShuffleBoard();
         }
 
         public void GoToLevelSelect()
         {
-            SoundManager.Instance.Play(Sounds.ButtonClick);
+            SoundManager.Instance.Play(SoundTypes.ButtonClick);
             Time.timeScale = 1f;
             pauseScreen.SetActive(false);
             SceneManager.LoadScene("LevelSelection");
         }
         public void ExitGame()
         {
-            SoundManager.Instance.Play(Sounds.ButtonClick);
+            SoundManager.Instance.Play(SoundTypes.ButtonClick);
             Time.timeScale = 1f;
             pauseScreen.SetActive(false);
             SceneManager.LoadScene("MainMenu");
@@ -87,7 +87,7 @@ namespace Managers
 
         public void TryAgain()
         {
-            SoundManager.Instance.Play(Sounds.ButtonClick);
+            SoundManager.Instance.Play(SoundTypes.ButtonClick);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             roundOverScreen.SetActive(false);
         }

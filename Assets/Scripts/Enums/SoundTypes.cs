@@ -1,6 +1,6 @@
 ﻿namespace Enums
 {
-    public enum Sounds
+    public enum SoundTypes
     {
         GemBreak,
         BombExplode,

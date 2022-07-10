@@ -23,6 +23,10 @@ PrefabInstance:
       propertyPath: scoreValue
       value: 80
       objectReference: {fileID: 0}
+    - target: {fileID: 2337052358783866190, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
+      propertyPath: destroyEffect
+      value: 
+      objectReference: {fileID: 4092122538528256240, guid: 85160bb4a5259fe4eae69ea9e2a445b9, type: 3}
     - target: {fileID: 2624750049957547654, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
       propertyPath: m_Sprite
       value: 

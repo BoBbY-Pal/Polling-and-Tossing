@@ -1708,7 +1708,7 @@ MonoBehaviour:
   - {fileID: 3720545620941325136, guid: 0baaee76f2430a6499d20c7b440d2248, type: 3}
   - {fileID: 5757276331912667762, guid: 02a783862d9f33e47a8e529cdb4407e5, type: 3}
   - {fileID: 6102158465651322648, guid: 69b01074b0e00a14e8560bc304a5338d, type: 3}
-  levelData: {fileID: 11400000, guid: 5d5d8b0d87bd1d2418acb59612e84713, type: 2}
+  levelData: {fileID: 11400000, guid: c3cb8035c1a38204d89a4d2615734ea1, type: 2}
 --- !u!4 &730250247
 Transform:
   m_ObjectHideFlags: 0
@@ -2212,7 +2212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bbefb5d7180526488d94f1b2644fb4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetScoreSO: {fileID: 11400000, guid: 71c41bf7a29ebfc4b96e93021a918ed7, type: 2}
+  targetScoreSO: {fileID: 11400000, guid: 1242aac56d4e7424ca3c7a9d2e3a0535, type: 2}
   roundTime: 60
   currentScore: 0
   scoreTransitionSpeed: 5

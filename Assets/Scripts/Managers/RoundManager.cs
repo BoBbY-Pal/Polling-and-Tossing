@@ -80,7 +80,7 @@ public class RoundManager : MonoBehaviour
     
         UIManager.Instance.finalScore.text = currentScore.ToString();
         
-        SoundManager.Instance.Play(Sounds.RoundOver);
+        SoundManager.Instance.Play(SoundTypes.RoundOver);
 
         if (currentScore >= star1scoreTarget && currentScore < star2scoreTarget)
         {

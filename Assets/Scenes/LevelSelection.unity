@@ -1330,7 +1330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6846bfd3474f48758e06d5d97097404b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: L2
+  levelToLoad: L6
   stars:
   - {fileID: 1561952608}
   - {fileID: 2030856980}
@@ -1841,7 +1841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6846bfd3474f48758e06d5d97097404b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: L2
+  levelToLoad: L7
   stars:
   - {fileID: 507287631}
   - {fileID: 1812843920}
@@ -3553,7 +3553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6846bfd3474f48758e06d5d97097404b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: L2
+  levelToLoad: L8
   stars:
   - {fileID: 2133837582}
   - {fileID: 647687148}
@@ -3904,6 +3904,10 @@ MonoBehaviour:
   - L2
   - L3
   - L4
+  - L5
+  - L6
+  - L7
+  - L8
 --- !u!4 &1544444914
 Transform:
   m_ObjectHideFlags: 0
@@ -4519,7 +4523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6846bfd3474f48758e06d5d97097404b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: L2
+  levelToLoad: L5
   stars:
   - {fileID: 2146035656}
   - {fileID: 742908738}

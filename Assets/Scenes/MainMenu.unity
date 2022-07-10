@@ -800,18 +800,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 225896575}
-  soundMusic: {fileID: 1029067018}
-  sounds:
-  - soundType: 1
-    soundClip: {fileID: 8300000, guid: 9dcc9b1297952c446a5571fdb2fb7a2f, type: 3}
-  - soundType: 2
-    soundClip: {fileID: 8300000, guid: 12f0733135e9e604d8a960b0655e03d0, type: 3}
+  sound:
   - soundType: 0
     soundClip: {fileID: 8300000, guid: 5eee8c96923a90d4a88dcd7369fcbc1a, type: 3}
+    b_IsMute: 0
+    volume: 0.15
+  - soundType: 2
+    soundClip: {fileID: 8300000, guid: 12f0733135e9e604d8a960b0655e03d0, type: 3}
+    b_IsMute: 0
+    volume: 0.506
+  - soundType: 1
+    soundClip: {fileID: 8300000, guid: 9dcc9b1297952c446a5571fdb2fb7a2f, type: 3}
+    b_IsMute: 0
+    volume: 0.3
   - soundType: 4
     soundClip: {fileID: 8300000, guid: 3fb2c253444176240aa6175c690b6850, type: 3}
+    b_IsMute: 0
+    volume: 0.25
   - soundType: 3
     soundClip: {fileID: 8300000, guid: 4c7d330755b8c1c478fa5bae659f3632, type: 3}
+    b_IsMute: 0
+    volume: 0.5
 --- !u!81 &690169460
 AudioListener:
   m_ObjectHideFlags: 0

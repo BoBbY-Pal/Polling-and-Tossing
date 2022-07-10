@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Enums;
 using Managers;
-using Singleton;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -21,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] 
     public BoardState currenState = BoardState.Move;
+    
     public static GameManager Instance { get; private set; }
     
     private void Awake()
@@ -42,16 +42,15 @@ public class GameManager : MonoBehaviour
                 switch (board.boardGrid[pos.x, pos.y].type)
                 {
                     case GemType.Bomb:
-                        // SoundManager.Instance.PlayExplosionSound();
-                      SoundManager.Instance.Play(Sounds.BombExplode);  
+                        SoundManager.Instance.Play(SoundTypes.BombExplode);  
                         break;
+                    
                     case GemType.Stone:
-                        // SoundManager.Instance.PlayStoneBreakSound();
-                        SoundManager.Instance.Play(Sounds.StoneBreak);
+                        SoundManager.Instance.Play(SoundTypes.StoneBreak);
                         break;
+                    
                     default:
-                        // SoundManager.Instance.PlayGemBreakSound();
-                        SoundManager.Instance.Play(Sounds.GemBreak);
+                        SoundManager.Instance.Play(SoundTypes.GemBreak);
                         break;
                 }
                 Instantiate(board.boardGrid[pos.x, pos.y].destroyEffect, new Vector2(pos.x, pos.y), Quaternion.identity);

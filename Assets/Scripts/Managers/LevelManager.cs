@@ -42,7 +42,7 @@ namespace Managers
         private void SetLevelStatus(string level, LevelStatus levelStatus)
         {
             PlayerPrefs.SetInt(level, (int)levelStatus);
-            Debug.Log("Setting " + level +" status " + levelStatus);
+            GameLogManager.CustomLog("Setting " + level +" status " + levelStatus);
         }
     }
 }

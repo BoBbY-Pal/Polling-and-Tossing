@@ -325,6 +325,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 600161839}
     m_Modifications:
+    - target: {fileID: 8708220168581897082, guid: 674cfb85f93d1e848b8e6ac6a06b0c80, type: 3}
+      propertyPath: m_Color.b
+      value: 0.28235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708220168581897082, guid: 674cfb85f93d1e848b8e6ac6a06b0c80, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708220168581897082, guid: 674cfb85f93d1e848b8e6ac6a06b0c80, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8708220168581897083, guid: 674cfb85f93d1e848b8e6ac6a06b0c80, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -419,11 +431,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8708220168581897084, guid: 674cfb85f93d1e848b8e6ac6a06b0c80, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.0000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 8708220168581897084, guid: 674cfb85f93d1e848b8e6ac6a06b0c80, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -238
+      value: -356
       objectReference: {fileID: 0}
     - target: {fileID: 8708220168581897084, guid: 674cfb85f93d1e848b8e6ac6a06b0c80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -653,8 +665,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15, y: 195.37805}
-  m_SizeDelta: {x: 1719.1533, y: 606.5783}
+  m_AnchoredPosition: {x: 42, y: 283}
+  m_SizeDelta: {x: 1778.4614, y: 548.8645}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &639360935
 MonoBehaviour:
@@ -676,7 +688,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MATCH ME
+  m_text: POLLING AND TOSSING
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
@@ -703,7 +715,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 300
+  m_fontSize: 237.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -739,7 +751,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -32.866333, w: 248.32315}
+  m_margin: {x: 0, y: 0, z: 10.266602, w: 11.091705}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -25184,6 +25196,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 600161839}
     m_Modifications:
+    - target: {fileID: 8708220168581897082, guid: 674cfb85f93d1e848b8e6ac6a06b0c80, type: 3}
+      propertyPath: m_Color.b
+      value: 0.28235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708220168581897082, guid: 674cfb85f93d1e848b8e6ac6a06b0c80, type: 3}
+      propertyPath: m_Color.g
+      value: 0.85098046
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708220168581897082, guid: 674cfb85f93d1e848b8e6ac6a06b0c80, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8708220168581897083, guid: 674cfb85f93d1e848b8e6ac6a06b0c80, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -25278,11 +25302,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8708220168581897084, guid: 674cfb85f93d1e848b8e6ac6a06b0c80, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.0000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 8708220168581897084, guid: 674cfb85f93d1e848b8e6ac6a06b0c80, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -27
+      value: -113
       objectReference: {fileID: 0}
     - target: {fileID: 8708220168581897084, guid: 674cfb85f93d1e848b8e6ac6a06b0c80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

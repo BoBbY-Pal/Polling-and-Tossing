@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3401b033ae3e4b6ea7478882de2320cf, type: 3}
+  m_Name: Level14
+  m_EditorClassIdentifier: 
+  boardWidth: 8
+  boardHeight: 8
+  tileBgPrefab: {fileID: 6490645704314675659, guid: 12cc346aa4f5f2d458222da9c8fd7c49, type: 3}
+  gemTransitionSpeed: 15
+  bombChance: 6
+  bombBlastRadius: 2
+  gems:
+  - {fileID: 2337052358783866190, guid: 62ae0ecec7de42f4882c2391534c172f, type: 3}
+  - {fileID: 3720545620941325136, guid: 0baaee76f2430a6499d20c7b440d2248, type: 3}
+  - {fileID: 5757276331912667762, guid: 02a783862d9f33e47a8e529cdb4407e5, type: 3}
+  - {fileID: 6102158465651322648, guid: 69b01074b0e00a14e8560bc304a5338d, type: 3}
+  - {fileID: 5504530879634125718, guid: ea60936461c494d4aafc7680d74477a5, type: 3}
+  - {fileID: 632309661480850075, guid: 9302c29c0aa7eb1458a8d9795f85767c, type: 3}
+  - {fileID: 2623538879149831976, guid: 3bae0a992f9eef54ebb5985be015391e, type: 3}
+  bomb: {fileID: 4157618416460693640, guid: 9e110557375da6147b13409897ec6adc, type: 3}

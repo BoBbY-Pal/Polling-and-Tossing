@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using Enums;
 using Managers;
-using Newtonsoft.Json.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Gem : MonoBehaviour
 {
@@ -28,8 +26,6 @@ public class Gem : MonoBehaviour
 
     private Gem neighborGem;
     private Vector2Int previousPos;
-    
-    // public int bombBlastRadius = 1;
 
     public int scoreValue = 10;
     

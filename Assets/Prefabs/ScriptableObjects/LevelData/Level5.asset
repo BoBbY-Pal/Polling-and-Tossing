@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3401b033ae3e4b6ea7478882de2320cf, type: 3}
   m_Name: Level5
   m_EditorClassIdentifier: 
-  boardWidth: 5
-  boardHeight: 5
+  boardWidth: 6
+  boardHeight: 6
   tileBgPrefab: {fileID: 6490645704314675659, guid: 12cc346aa4f5f2d458222da9c8fd7c49, type: 3}
   gemTransitionSpeed: 15
   bombChance: 6

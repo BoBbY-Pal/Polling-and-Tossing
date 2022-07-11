@@ -4,7 +4,6 @@ using Managers;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using UnityEngine.Windows.WebCam;
 
 [RequireComponent(typeof(Button))]
 public class LevelLoader : MonoBehaviour 
@@ -33,9 +32,7 @@ public class LevelLoader : MonoBehaviour
                 SoundManager.Instance.Play(SoundTypes.ButtonClick);
                 levelLockedWarning.SetActive(true);
                 
-                StartCoroutine(WaitFewSeconds());
-                
-                SceneManager.LoadScene(levelToLoad); // ToDo: remove this in final build.
+                StartCoroutine(DeactivateLevelLockedScreen());
                 break;
             case LevelStatus.Unlocked:
                 SoundManager.Instance.Play(SoundTypes.ButtonClick);
@@ -49,7 +46,8 @@ public class LevelLoader : MonoBehaviour
 
          
     }
-    IEnumerator WaitFewSeconds()
+
+    private IEnumerator DeactivateLevelLockedScreen()
     {
         yield return new WaitForSeconds(2);
         levelLockedWarning.SetActive(false);

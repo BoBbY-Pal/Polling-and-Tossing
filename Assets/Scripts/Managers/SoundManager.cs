@@ -24,7 +24,7 @@ public class SoundManager : MonoGenericSingleton<SoundManager>
         }
         else
         {
-            Debug.Log("Clip not found for sound type: " + soundType);
+            GameLogManager.CustomLog("Clip not found for sound type: " + soundType);
         }
     }
 

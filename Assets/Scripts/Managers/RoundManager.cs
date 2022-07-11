@@ -1,4 +1,3 @@
-using System;
 using Enums;
 using Managers;
 using ScriptableObject;
@@ -14,15 +13,15 @@ public class RoundManager : MonoBehaviour
     public float roundTime = 60f;
     private bool b_RoundEnd;
 
-    //[HideInInspector]
+    [HideInInspector]
     public int currentScore;        // Current score of the game.
     private float displayScore;     // Score that fill be displayed on the screen.
     
     [Tooltip("How fast score changes")]
     public int scoreTransitionSpeed;
 
-    private int starsEarned;
-    private int prevStarsEarned;
+    private int earnedStars;
+    private int prevEarnedStars;
     
     private int star1scoreTarget, star2scoreTarget, star3scoreTarget;
 
@@ -82,50 +81,58 @@ public class RoundManager : MonoBehaviour
         
         SoundManager.Instance.Play(SoundTypes.RoundOver);
 
+        GiveRating();  
+        
+        DisplayRating();
+    }
+    
+    private void GiveRating()
+    {
         if (currentScore >= star1scoreTarget && currentScore < star2scoreTarget)
         {
-             starsEarned = 1;
-            UIManager.Instance.congoText.text = "Congratulations you earned " + starsEarned + " star!";
+            earnedStars = 1;
+            UIManager.Instance.congoText.text = "Congratulations you earned " + earnedStars + " star!";
         }
 
-        else if ( currentScore >= star2scoreTarget && currentScore < star3scoreTarget)
+        else if (currentScore >= star2scoreTarget && currentScore < star3scoreTarget)
         {
-            starsEarned = 2;
-            UIManager.Instance.congoText.text = "Congratulations you earned " + starsEarned + " stars!";
-            
+            earnedStars = 2;
+            UIManager.Instance.congoText.text = "Congratulations you earned " + earnedStars + " stars!";
         }
 
         else if (currentScore >= star3scoreTarget)
         {
-            starsEarned = 3;
-            UIManager.Instance.congoText.text = "Congratulations you earned " + starsEarned + " stars!";
-        
+            earnedStars = 3;
+            UIManager.Instance.congoText.text = "Congratulations you earned " + earnedStars + " stars!";
         }
         else
         {
-            starsEarned = 0;
+            earnedStars = 0;
             UIManager.Instance.congoText.text = "Oh no! No stars for you, Wanna try again?";
         }
-        
-        //  Check whether user completed the level or not..
-        if (starsEarned >= 2)
+    }
+   
+    private void DisplayRating()
+    {
+        // Fetching how many stars user earned while playing in the past. 
+        prevEarnedStars = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "StarsEarned");
+
+        //Storing earned stars from current match in a local disk. 
+        if (earnedStars > prevEarnedStars)
         {
-            LevelManager.Instance.MarkLevelComplete();
-        }
-            
-        // Fetching past earned stars. 
-        prevStarsEarned = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "StarsEarned");
-        
-        //Storing earned stars in a local disk. 
-        if (starsEarned > prevStarsEarned)
-        {
-            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "StarsEarned", starsEarned);
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "StarsEarned", earnedStars);
         }
 
         // Show how many stars user earned while playing game.
-        for (int i = 0; i < starsEarned; i++)
-        {   
+        for (int i = 0; i < earnedStars; i++)
+        {
             UIManager.Instance.stars[i].SetActive(true);
+        }
+        
+        //  Check whether user completed the level or not..
+        if (earnedStars >= 2)
+        {
+            LevelManager.Instance.MarkLevelComplete();
         }
     }
 }

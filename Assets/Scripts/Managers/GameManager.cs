@@ -8,14 +8,10 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-    public RoundManager roundManager;
     public MatchFinder matchFinder;
    
     [HideInInspector] 
     public BoardManager board;
-    
-    private int bonusMultiplier;
-    private float bonusAmmount = .5f;
 
     [HideInInspector] 
     public BoardState currenState = BoardState.Move;
@@ -63,7 +59,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (var gem in matchFinder.currentMatches.Where(gem => gem != null))
         {
-            AddScore(gem);
+            // SoundManager.Instance.AddScore(gem);
             DestroyMatchesAt(gem.posIndex);
         }
 
@@ -106,13 +102,13 @@ public class GameManager : MonoBehaviour
         
         if (matchFinder.currentMatches.Count > 0)     // Destroying new matches after refilling.
         {
-            bonusMultiplier++;
+            ScoreManager.Instance.scoreMultiplierCount++;
             yield return new WaitForSeconds(.5f);
             DestroyMatches();
         }
         else
         {
-            bonusMultiplier = 0;
+            ScoreManager.Instance.scoreMultiplierCount = 0;
             yield return new WaitForSeconds(.5f);
             currenState = BoardState.Move;
         }
@@ -170,15 +166,5 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void AddScore(Gem gemToCheck)
-    {
-        roundManager.currentScore += gemToCheck.scoreValue;
-        
-        // Bonus score
-        if (bonusMultiplier > 0)
-        {
-            float bonusToAdd = gemToCheck.scoreValue * bonusMultiplier * bonusAmmount;
-            roundManager.currentScore += Mathf.RoundToInt(bonusToAdd);
-        }
-    }
+   
 }

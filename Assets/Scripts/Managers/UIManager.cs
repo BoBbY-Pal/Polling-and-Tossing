@@ -1,4 +1,3 @@
-using System;
 using Enums;
 using TMPro;
 using UnityEngine;
@@ -20,8 +19,13 @@ namespace Managers
         public GameObject roundOverScreen;
         public GameObject pauseScreen;
     
+        [Tooltip("Amount of time in seconds after which round will end.")]
+        public float roundTime = 60f;
+        private bool b_RoundEnd;
+        
         private void Awake()
         {
+            #region SINGLETON   
             if (Instance != null)
             {
                 Destroy(gameObject);
@@ -30,6 +34,7 @@ namespace Managers
             {
                 Instance = this;
             }
+            #endregion
         }
         private void Start()
         {
@@ -41,12 +46,64 @@ namespace Managers
 
         private void Update()
         {
+            StartRoundTimer();
+            
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 PauseUnpauseScreen();
             }
         }
+        
+        private void StartRoundTimer()
+        {
+            if (roundTime > 0)
+            {
+                roundTime -= Time.deltaTime;
 
+                if (roundTime <= 0)
+                {
+                    roundTime = 0;
+                    b_RoundEnd = true;
+                }
+            }
+
+            if (b_RoundEnd && GameManager.Instance.currenState == BoardState.Move)
+            {
+                RoundOver();
+                b_RoundEnd = false;
+            }
+
+            timeText.text = roundTime.ToString("0.0") + "s";
+        }
+
+        private void RoundOver()
+        {
+            roundOverScreen.SetActive(true);
+    
+            finalScore.text = ScoreManager.Instance.CurrentScore.ToString();
+        
+            SoundManager.Instance.Play(SoundTypes.RoundOver);
+
+            ScoreManager.Instance.GiveRating();  
+        
+            DisplayRating();
+        }
+        
+        private void DisplayRating()
+        {
+            // Show how many stars user earned while playing game.
+            for (int i = 0; i < ScoreManager.Instance.EarnedStars; i++)
+            {
+                stars[i].SetActive(true);
+            }
+        }
+
+        public void ShuffleBoard()
+        {
+            SoundManager.Instance.Play(SoundTypes.ButtonClick);
+            GameManager.Instance.ShuffleBoard();
+        }
+        
         public void PauseUnpauseScreen()
         {
             SoundManager.Instance.Play(SoundTypes.ButtonClick);
@@ -62,12 +119,6 @@ namespace Managers
                 Time.timeScale = 1f;
             }
 
-        }
-
-        public void ShuffleBoard()
-        {
-            SoundManager.Instance.Play(SoundTypes.ButtonClick);
-            GameManager.Instance.ShuffleBoard();
         }
 
         public void GoToLevelSelect()

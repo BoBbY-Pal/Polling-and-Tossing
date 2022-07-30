@@ -967,6 +967,7 @@ MonoBehaviour:
   - {fileID: 1406498760}
   roundOverScreen: {fileID: 349095312}
   pauseScreen: {fileID: 1073647969}
+  roundTime: 60
 --- !u!114 &362330763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2229,7 +2230,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 848079649}
-  - component: {fileID: 848079648}
+  - component: {fileID: 848079650}
   m_Layer: 0
   m_Name: Round Manager
   m_TagString: Untagged
@@ -2237,22 +2238,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &848079648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 848079647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bbefb5d7180526488d94f1b2644fb4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetScoreSO: {fileID: 11400000, guid: a307dc1aded68fd439643505aa8c6755, type: 2}
-  roundTime: 60
-  currentScore: 0
-  scoreTransitionSpeed: 5
 --- !u!4 &848079649
 Transform:
   m_ObjectHideFlags: 0
@@ -2268,6 +2253,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &848079650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848079647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 980c7d9b136c45458d0431488d8f3b48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScoreSO: {fileID: 11400000, guid: a307dc1aded68fd439643505aa8c6755, type: 2}
+  scoreMultiplierCount: 0
+  scoreTransitionSpeed: 5
 --- !u!1 &853010702
 GameObject:
   m_ObjectHideFlags: 0
@@ -4436,7 +4436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5a2f3d95ea4f1791ebdf2dc1a58dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundManager: {fileID: 848079648}
   matchFinder: {fileID: 1489846834}
   board: {fileID: 730250246}
   currenState: 1

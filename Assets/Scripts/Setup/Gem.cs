@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Gem : MonoBehaviour
 {
-    #region Variables
+    #region VARIABLES & REFRENCES
 
     [HideInInspector] public Vector2Int posIndex;
     [Tooltip("Select type of the Gem.")] 
@@ -17,20 +17,27 @@ public class Gem : MonoBehaviour
     
     [HideInInspector] public BoardManager boardManager;
     
-    private Vector2 firstTouchPosition;
-    private Vector2 finalTouchPosition;
-    private float swipeAngle;
+    private Vector2 m_firstTouchPosition;
+    private Vector2 m_finalTouchPosition;
+    private float m_swipeAngle;
 
     private bool b_MousePressed;
     public bool b_IsMatched;
 
-    private Gem neighborGem;
-    private Vector2Int previousPos;
+    private Gem m_neighborGem;
+    private Vector2Int m_previousPos;
 
     public int scoreValue = 10;
     
     #endregion
-    
+
+    public static event Action<Gem> GemDestroyed;
+
+    private void OnDisable()
+    {
+        GemDestroyed?.Invoke(this);
+    }
+
     void Update()
     {
         CheckSwipe();
@@ -38,11 +45,9 @@ public class Gem : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (GameManager.Instance.currenState ==  BoardState.Move && GameManager.Instance.roundManager.roundTime > 0 )
-        {
-            if (Camera.main != null) firstTouchPosition = Camera.main.ScreenToWorldPoint( Input.mousePosition );
-            b_MousePressed = true;
-        }
+        if (GameManager.Instance.currenState != BoardState.Move || !(UIManager.Instance.roundTime > 0)) return;
+        if (Camera.main != null) m_firstTouchPosition = Camera.main.ScreenToWorldPoint( Input.mousePosition );
+        b_MousePressed = true;
     }
     
     private void CheckSwipe()
@@ -58,15 +63,11 @@ public class Gem : MonoBehaviour
             boardManager.boardGrid[posIndex.x, posIndex.y] = this;
         }
 
-        if (b_MousePressed && Input.GetMouseButtonUp(0))
-        {
-            b_MousePressed = false;
-            if (GameManager.Instance.currenState == BoardState.Move && GameManager.Instance.roundManager.roundTime > 0)
-            {
-                if (Camera.main != null) finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                CalculateSwipeAngle();
-            }
-        }
+        if (!b_MousePressed || !Input.GetMouseButtonUp(0)) return;
+        b_MousePressed = false;
+        if (GameManager.Instance.currenState != BoardState.Move || !(UIManager.Instance.roundTime > 0)) return;
+        if (Camera.main != null) m_finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        CalculateSwipeAngle();
     }
 
     public void SetupGem(Vector2Int pos, BoardManager theBoardManager)
@@ -77,12 +78,12 @@ public class Gem : MonoBehaviour
     
     private void CalculateSwipeAngle()
     {
-        swipeAngle = Mathf.Atan2(finalTouchPosition.y - firstTouchPosition.y,
-                                 finalTouchPosition.x - firstTouchPosition.x);
-        swipeAngle = swipeAngle * 180 / MathF.PI;
-        GameLogManager.CustomLog(swipeAngle);
+        m_swipeAngle = Mathf.Atan2(m_finalTouchPosition.y - m_firstTouchPosition.y,
+                                 m_finalTouchPosition.x - m_firstTouchPosition.x);
+        m_swipeAngle = m_swipeAngle * 180 / MathF.PI;
+        GameLogManager.CustomLog(m_swipeAngle);
 
-        if (Vector3.Distance(firstTouchPosition, finalTouchPosition ) > 0.5f)
+        if (Vector3.Distance(m_firstTouchPosition, m_finalTouchPosition ) > 0.5f)
         {
             MovePieces();
         }
@@ -90,39 +91,39 @@ public class Gem : MonoBehaviour
     
     private void MovePieces()
     {
-        previousPos = posIndex;
+        m_previousPos = posIndex;
 
-        switch (swipeAngle)
+        switch (m_swipeAngle)
         {
             // Right swipe
             case > -45 and < 45 when posIndex.x < boardManager.width - 1:
-                neighborGem = boardManager.boardGrid[posIndex.x + 1, posIndex.y];
-                neighborGem.posIndex.x--;
+                m_neighborGem = boardManager.boardGrid[posIndex.x + 1, posIndex.y];
+                m_neighborGem.posIndex.x--;
                 posIndex.x++;
                 break;
             // Up swipe
             case > 45 and <= 135 when posIndex.y < boardManager.height - 1:
-                neighborGem = boardManager.boardGrid[posIndex.x, posIndex.y + 1];
-                neighborGem.posIndex.y--;
+                m_neighborGem = boardManager.boardGrid[posIndex.x, posIndex.y + 1];
+                m_neighborGem.posIndex.y--;
                 posIndex.y++;
                 break;
             // Down swipe
             case >= -135 and < -45 when posIndex.y > 0:
-                neighborGem = boardManager.boardGrid[posIndex.x, posIndex.y - 1];
-                neighborGem.posIndex.y++;
+                m_neighborGem = boardManager.boardGrid[posIndex.x, posIndex.y - 1];
+                m_neighborGem.posIndex.y++;
                 posIndex.y--;
                 break;
             // left swipe
             case > 135:
             case <= -135 when posIndex.x > 0:
-                neighborGem = boardManager.boardGrid[posIndex.x - 1, posIndex.y];
-                neighborGem.posIndex.x++;
+                m_neighborGem = boardManager.boardGrid[posIndex.x - 1, posIndex.y];
+                m_neighborGem.posIndex.x++;
                 posIndex.x--;
                 break;
         }
         // Ensuring gems are on correct position.
         boardManager.boardGrid[posIndex.x, posIndex.y] = this;
-        boardManager.boardGrid[neighborGem.posIndex.x, neighborGem.posIndex.y] = neighborGem;
+        boardManager.boardGrid[m_neighborGem.posIndex.x, m_neighborGem.posIndex.y] = m_neighborGem;
 
         StartCoroutine(CheckMove());
     }
@@ -134,15 +135,15 @@ public class Gem : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         GameManager.Instance.matchFinder.FindAllGemMatches();
 
-        if (neighborGem != null)
+        if (m_neighborGem != null)
         {
-            if (!b_IsMatched && !neighborGem.b_IsMatched)
+            if (!b_IsMatched && !m_neighborGem.b_IsMatched)
             {
-                neighborGem.posIndex = posIndex;
-                posIndex = previousPos;
+                m_neighborGem.posIndex = posIndex;
+                posIndex = m_previousPos;
                 
                 boardManager.boardGrid[posIndex.x, posIndex.y] = this;
-                boardManager.boardGrid[neighborGem.posIndex.x, neighborGem.posIndex.y] = neighborGem;
+                boardManager.boardGrid[m_neighborGem.posIndex.x, m_neighborGem.posIndex.y] = m_neighborGem;
 
                 yield return new WaitForSeconds(.5f);
                 GameManager.Instance.currenState = BoardState.Move;

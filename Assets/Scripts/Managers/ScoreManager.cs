@@ -1,5 +1,4 @@
-﻿using System;
-using Managers;
+﻿using Managers;
 using ScriptableObject;
 using Singleton;
 using UnityEngine;
@@ -53,6 +52,13 @@ public class ScoreManager : MonoGenericSingleton<ScoreManager>
         m_star3scoreTarget = targetScoreSO.star3ScoreTarget;
     }
 
+    public void ResetScore()
+    {
+        CurrentScore = 0;
+        m_displayScore = 0;
+        UIManager.Instance.scoreText.text = CurrentScore.ToString("0");
+    }
+    
     private void UpdateScore(Gem gemToCheck)
     {
         CurrentScore += gemToCheck.scoreValue;

@@ -32,11 +32,7 @@ public class Gem : MonoBehaviour
     #endregion
 
     public static event Action<Gem> GemDestroyed;
-
-    private void OnDisable()
-    {
-        GemDestroyed?.Invoke(this);
-    }
+    
 
     void Update()
     {
@@ -125,10 +121,10 @@ public class Gem : MonoBehaviour
         boardManager.boardGrid[posIndex.x, posIndex.y] = this;
         boardManager.boardGrid[m_neighborGem.posIndex.x, m_neighborGem.posIndex.y] = m_neighborGem;
 
-        StartCoroutine(CheckMove());
+        StartCoroutine(CheckMatchWithMove());
     }
 
-    private IEnumerator CheckMove()     // Check if there's a match with move if not then return back to it's position.
+    private IEnumerator CheckMatchWithMove()   
     {
         GameManager.Instance.currenState = BoardState.Wait;
         
@@ -153,5 +149,27 @@ public class Gem : MonoBehaviour
                 GameManager.Instance.DestroyMatches();
             }
         }
+    }
+
+    public void InvokeGemDestroyed(Gem gem, Vector2Int pos)
+    {
+        Instantiate(gem.destroyEffect, new Vector2(pos.x, pos.y), Quaternion.identity);
+        
+        switch (gem.type)
+        {
+            case GemType.Bomb:
+                SoundManager.Instance.Play(SoundTypes.BombExplode);  
+                break;
+                    
+            case GemType.Stone:
+                SoundManager.Instance.Play(SoundTypes.StoneBreak);
+                break;
+                    
+            default:
+                SoundManager.Instance.Play(SoundTypes.GemBreak);
+                break;
+        }
+        GemDestroyed?.Invoke(this);
+        Destroy(gem.gameObject);
     }
 }

@@ -66,11 +66,13 @@ namespace Managers
         
         private void SetupBoard()
         {
+            ScoreManager.Instance.ResetScore();
+            
             if (_boardLayout != null)
             {
                 _storedLayout = _boardLayout.GetLayout();
             }
-        
+
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)

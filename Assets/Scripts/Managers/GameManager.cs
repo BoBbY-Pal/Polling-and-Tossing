@@ -30,26 +30,12 @@ public class GameManager : MonoBehaviour
     
     private void DestroyMatchesAt(Vector2Int pos)
     {
-        if (board.boardGrid[pos.x, pos.y] != null )
+        Gem gem = board.boardGrid[pos.x, pos.y];
+        if (gem != null )
         {
-            if (board.boardGrid[pos.x, pos.y].b_IsMatched)
+            if (gem.b_IsMatched)
             {
-                switch (board.boardGrid[pos.x, pos.y].type)
-                {
-                    case GemType.Bomb:
-                        SoundManager.Instance.Play(SoundTypes.BombExplode);  
-                        break;
-                    
-                    case GemType.Stone:
-                        SoundManager.Instance.Play(SoundTypes.StoneBreak);
-                        break;
-                    
-                    default:
-                        SoundManager.Instance.Play(SoundTypes.GemBreak);
-                        break;
-                }
-                Instantiate(board.boardGrid[pos.x, pos.y].destroyEffect, new Vector2(pos.x, pos.y), Quaternion.identity);
-                Destroy(board.boardGrid[pos.x, pos.y].gameObject);
+                gem.InvokeGemDestroyed(gem, pos);
                 board.boardGrid[pos.x, pos.y] = null;
             }
         }
